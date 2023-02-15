@@ -10,7 +10,7 @@
 			display: flex;
 			align-items: center;
 			font-size: 1.25rem;
-			margin-right: 2rem;
+			margin-right: 3rem;
 
 			img {
 				display: inline-block;
@@ -31,14 +31,18 @@
 			margin: 0;
 			padding: 0;
 
+			a.active {
+				border-bottom: 3px solid #4280d5;
+			}
+
+			a:hover {
+				background-color: #e3f2fd;
+			}
+
 			li {
 				display: flex;
 				align-items: center;
 				padding: 16px 16px;
-			}
-
-			li:hover {
-				background-color: #e3f2fd;
 			}
 		}
 

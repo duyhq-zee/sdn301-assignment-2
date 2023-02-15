@@ -7,12 +7,17 @@
 				<h3 class="m-0">FPT88</h3></a
 			>
 			<ul class="left-nav">
-				<li class="user-btn">
-					<a href="/nations">Quốc gia</a>
-				</li>
-				<li class="user-btn">
-					<a href="/players">Cầu thủ</a>
-				</li>
+				<a href="/nations" class="user-btn <%= path.includes('nations') ? 'active' : '' %>" >
+					<li class="">
+						Quốc gia
+					</li>
+				</a>
+				
+				<a href="/players" class="<%= path.includes('players') ? 'active' : '' %>">
+					<li class="user-btn">
+						Cầu thủ
+					</li>
+				</a>
 			</ul>
 		</div>
 

@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   font-size: 1.25rem;
-  margin-right: 2rem;
+  margin-right: 3rem;
 }
 .main-header .navbar .logo img {
   display: inline-block;
@@ -27,13 +27,16 @@
   margin: 0;
   padding: 0;
 }
+.main-header .navbar ul a.active {
+  border-bottom: 3px solid #4280d5;
+}
+.main-header .navbar ul a:hover {
+  background-color: #e3f2fd;
+}
 .main-header .navbar ul li {
   display: flex;
   align-items: center;
   padding: 16px 16px;
-}
-.main-header .navbar ul li:hover {
-  background-color: #e3f2fd;
 }
 .main-header .navbar .right-nav i {
   width: 100%;
