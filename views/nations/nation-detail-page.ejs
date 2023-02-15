@@ -26,11 +26,12 @@
                   <%= nation.description %>
                 </p>
                 
-                <p class="fw-bold mt-4">Các cầu thủ</p>
+                <h5 class="fw-bold mt-4">Các cầu thủ</h5>
                 <!-- Player list -->
-                <div class="mt-4">
+                <div class="mt-2">
                   <%- include('../partials/players/player-list.ejs', {players: players}) %>
                 </div>
+                <p class="text-secondary"><%= players.length == 0 ? '(Chưa có cầu thủ nào)' : ''%></p>
               </div>
             </div>
           </div>

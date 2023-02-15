@@ -1,20 +1,16 @@
 .nation-list-column {
-	border-radius: 6px;
-}
-
-.nation-list {
 	background-color: #fff;
+	border-radius: 6px;
 }
 
 a.nation-item {
 	color: black;
 	text-decoration: none;
 	border-bottom: 1px solid #c0c0c0;
-	background-color: #fff;
 }
 
 a.nation-item.active {
-	background-color: #e7e9f2;
+	background-color: #ebf0f4;
 }
 
 .nation-detail-container {
@@ -24,4 +20,10 @@ a.nation-item.active {
 	.buttons {
 		right: 24px;
 	}
+}
+
+a.add-nation-btn {
+	background-color: #1976d2;
+	border-radius: 6px 6px 0 0;
+	color: #fff;
 }

@@ -11,13 +11,13 @@
           <div class="col-8 position-relative">
 
             <form action="/nations/edit-nation/<%= nation.id %>" method="POST"
-              class="w-75 d-flex align-items-center flex-column">
+              class="w-100 d-flex align-items-end flex-column">
               <input type="text" id="name" name="name" class="form-control mb-2" placeholder="Tên" value="<%= nation.name %>">
         
               <input type="text" id="description" name="description" class="form-control mb-2" placeholder="Mô tả"
                 value="<%= nation.description %>">
         
-              <button type="submit" class="btn btn-sm btn-primary position-absolute end-0"><i class="bi bi-check-square"></i></button>
+              <button type="submit" class="btn btn-sm btn-primary">Lưu</button>
             </form>
   
             <!-- Player list -->

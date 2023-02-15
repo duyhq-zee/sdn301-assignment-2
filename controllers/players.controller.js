@@ -58,6 +58,7 @@ exports.postEditPlayer = (req, res, next) => {
 		player.club = req.body.club;
 		player.nation = req.body.nation;
 		player.position = req.body.position;
+		player.isCaptain = req.body.isCaptain == 'true';
 		player.goals = +req.body.goals;
 
 		player.save();
