@@ -5,23 +5,23 @@
   <body>
     <%- include('../partials/navbar.ejs') %> 
     <main>
-      <div class="container-fluid">
+      <div class="container-fluid mt-4">
         <div class="row">
           <%- include('../partials/nations/nation-list.ejs') %>
-          <div class="col-8">
-            <div>
-              <form action="/nations/edit-nation/<%= nation.id %>" method="POST"
-                class="w-75 d-flex align-items-center flex-column">
-                <input type="text" id="name" name="name" class="form-control mb-2" placeholder="Tên" value="<%= nation.name %>">
-          
-                <input type="text" id="description" name="description" class="form-control mb-2" placeholder="Mô tả"
-                  value="<%= nation.description %>">
-          
-                <button type="submit" class="btn btn-sm btn-primary w-25 mt-3">Lưu</button>
-              </form>
-    
-              <!-- Player list -->
-            </div>
+          <div class="col-8 position-relative">
+
+            <form action="/nations/edit-nation/<%= nation.id %>" method="POST"
+              class="w-75 d-flex align-items-center flex-column">
+              <input type="text" id="name" name="name" class="form-control mb-2" placeholder="Tên" value="<%= nation.name %>">
+        
+              <input type="text" id="description" name="description" class="form-control mb-2" placeholder="Mô tả"
+                value="<%= nation.description %>">
+        
+              <button type="submit" class="btn btn-sm btn-primary position-absolute end-0"><i class="bi bi-check-square"></i></button>
+            </form>
+  
+            <!-- Player list -->
+
           </div>
         </div>
       </div>

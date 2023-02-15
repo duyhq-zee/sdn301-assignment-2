@@ -27,15 +27,15 @@
                 <% } %>
               </div>
             </div>
-            <div class="col-8">
+            <div class="col-8 position-relative">
+              <a href="/nations/edit-nation/<%= nation.id %>" class="btn btn-warning p-1 position-absolute end-0"><i class="bi bi-pencil-square"></i></a>
               <div>
-                <h3>
+                <h3 class="m-0">
                   <%= nation.name %>
                 </h3>
-                <p>
+                <p class="m-0">
                   <%= nation.description %>
                 </p>
-                <a href="/nations/edit-nation/<%= nation.id %>" class="btn btn-warning">Chỉnh sửa</a>
       
                 <!-- Player list -->
               </div>
