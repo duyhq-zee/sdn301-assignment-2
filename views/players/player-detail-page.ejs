@@ -1,0 +1,52 @@
+<%- include('../partials/head.ejs') %>
+		<link rel="stylesheet" href="/styles/css/player-detail.css">
+	</head>
+
+	<body>
+		<%- include('../partials/navbar.ejs') %>
+
+			<main>
+				<div class="container-fluid mt-4">
+          <div class="row">
+            <div class="col-5 image-container p-0">
+              <img src="<%= player.imageUrl %>" alt="">
+            </div>
+            <div class="col-7 container-fluid content">
+              <div class="player-property row">
+                <h3 class="m-0 col-4">Tên</h3>
+                <h3 class="m-0 col-7 fw-bold"><%= player.name%></h3>
+                <div class="col-1 d-flex">
+                  <%  if (player.isCaptain) { %>
+                    <i class="bi bi-bookmark-star-fill"></i>
+                  <% }%>
+                </div>
+              </div>
+              <div class="player-property row">
+                <h3 class="m-0 col-4">Câu lạc bộ</h3>
+                <h3 class="m-0 col-8 fw-bold"><%= player.club %></h3>
+              </div>
+              <div class="player-property row">
+                <h3 class="m-0 col-4">Quốc tịch</h3>
+                <h3 class="m-0 col-8 fw-bold"><%= player.nation %></h3>
+              </div>
+              <div class="player-property row">
+                <h3 class="m-0 col-4">Vị trí</h3>
+                <h3 class="m-0 col-8 fw-bold"><%= player.position%></h3>
+              </div>
+              <div class="player-property row">
+                <h3 class="m-0 col-4">Số bàn thắng</h3>
+                <h3 class="m-0 col-8 fw-bold"><%= player.goals%></h3>
+              </div>
+              <div class="mt-4">
+                <form action="/players/remove-player/<%= player.id %>" method="POST" class="d-inline-block">
+                  <input type="hidden" name="id" value="<%= player.id %>">
+                  <button class="btn btn-danger">Xóa</button>
+                </form>
+                <a href="/players/edit-player/<%= player.id %>" class="btn btn-warning">Chỉnh sửa</a>
+              </div>
+            </div>
+          </div>
+        </div>
+			</main>
+	</body>
+</html>

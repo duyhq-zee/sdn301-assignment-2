@@ -1,4 +1,27 @@
+.nation-list-column {
+	border-radius: 6px;
+}
+
+.nation-list {
+	background-color: #fff;
+}
+
 a.nation-item {
 	color: black;
 	text-decoration: none;
+	border-bottom: 1px solid #c0c0c0;
+	background-color: #fff;
+}
+
+a.nation-item.active {
+	background-color: #e7e9f2;
+}
+
+.nation-detail-container {
+	background-color: #fff;
+	border-radius: 6px;
+
+	.buttons {
+		right: 24px;
+	}
 }

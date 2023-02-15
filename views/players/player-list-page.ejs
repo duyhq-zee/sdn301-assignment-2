@@ -1,0 +1,15 @@
+<%- include('../partials/head.ejs') %>
+		<link rel="stylesheet" href="/styles/css/players.css">
+	</head>
+
+	<body>
+		<%- include('../partials/navbar.ejs') %>
+
+			<main>
+				<a href="/players/add-player" class="btn btn-primary mt-4">+ Thêm cầu thủ</a>
+				<div class="mt-4">
+					<%- include('../partials/players/player-list.ejs', {players: players}) %>
+				</div>
+			</main>
+	</body>
+</html>

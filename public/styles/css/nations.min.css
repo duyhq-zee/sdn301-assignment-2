@@ -1,1 +1,1 @@
-a.nation-item{color:#000;text-decoration:none}/*# sourceMappingURL=nations.min.css.map */
+.nation-list-column{border-radius:6px}.nation-list{background-color:#fff}a.nation-item{color:#000;text-decoration:none;border-bottom:1px solid silver;background-color:#fff}a.nation-item.active{background-color:#e7e9f2}.nation-detail-container{background-color:#fff;border-radius:6px}.nation-detail-container .buttons{right:24px}/*# sourceMappingURL=nations.min.css.map */

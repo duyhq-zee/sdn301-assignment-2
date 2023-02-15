@@ -1,5 +1,6 @@
 <%- include('../partials/head.ejs') %>
 		<link rel="stylesheet" href="/styles/css/nations.css">
+		<link rel="stylesheet" href="/styles/css/players.css">
 	</head>
 
 	<body>
@@ -8,36 +9,28 @@
       <main>
         <div class="container-fluid mt-4">
           <div class="row">
-            <div class="col-4">
-              <a href="/nations/add-nation" class="btn btn-outline-primary mb-3">+ Thêm</a>
-              <div class="nation-list">
-                <% if (nations.length> 0) { %>
-                  <% nations.forEach(nation=> { %>
-                    <a href="/nations/<%= nation.id %>" class="nation-item mb-2 d-block">
-                      <div>
-                        <h3 class="m-0">
-                          <%= nation.name %>
-                        </h3>
-                        <p class="description m-0">
-                          <%= nation.description %>
-                        </p>
-                      </div>
-                    </a>
-                  <% }) %>
-                <% } %>
+            <%- include('../partials/nations/nation-list.ejs') %>
+            <div class="col-8 position-relative nation-detail-container p-4">
+              <div class="position-absolute buttons">
+                <form action="/nations/remove-nation/<%= nation.id %>" method="POST" class="d-inline-block">
+                  <input type="hidden" name="id" value="<%= nation.id %>">
+                  <button class="btn btn-danger">Xóa</button>
+                </form>
+                <a href="/nations/edit-nation/<%= nation.id %>" class="btn btn-warning">Chỉnh sửa</a>
               </div>
-            </div>
-            <div class="col-8 position-relative">
-              <a href="/nations/edit-nation/<%= nation.id %>" class="btn btn-warning p-1 position-absolute end-0"><i class="bi bi-pencil-square"></i></a>
               <div>
-                <h3 class="m-0">
+                <h2 class="m-0 mb-2">
                   <%= nation.name %>
-                </h3>
+                </h2>
                 <p class="m-0">
                   <%= nation.description %>
                 </p>
-      
+                
+                <p class="fw-bold mt-4">Các cầu thủ</p>
                 <!-- Player list -->
+                <div class="mt-4">
+                  <%- include('../partials/players/player-list.ejs', {players: players}) %>
+                </div>
               </div>
             </div>
           </div>

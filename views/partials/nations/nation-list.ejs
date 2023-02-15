@@ -1,9 +1,12 @@
-<div class="col-4">
-  <a href="/nations/add-nation" class="btn btn-outline-primary mb-3">+ Thêm</a>
+<div class="col-4 p-0 pe-3 nation-list-column">
+  <!-- <a href="/nations/add-nation" class="btn btn-outline-primary mb-3">+ Thêm quốc gia</a> -->
+  <a href="/nations/add-nation" class="nation-item p-3 d-block text-primary">
+    + Thêm quốc gia
+  </a>
   <div class="nation-list">
     <% if (nations.length> 0) { %>
       <% nations.forEach(nation=> { %>
-        <a href="/nations/<%= nation.id %>" class="nation-item mb-2 d-block">
+        <a href="/nations/<%= nation.id %>" class="nation-item p-3 d-block <%= path.includes(nation.id) ? 'active' : ''%>">
           <div>
             <h3 class="m-0">
               <%= nation.name %>

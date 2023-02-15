@@ -1,4 +1,5 @@
 const Nation = require('../models/nation.model');
+const Player = require('../models/player.model');
 
 exports.getNations = (req, res, next) => {
 	Nation.find()
@@ -19,11 +20,15 @@ exports.getNationById = (req, res, next) => {
 	Nation.find()
 		.then((nations) => {
 			Nation.findById(req.params.nationId).then((nation) => {
-				res.render('nations/nation-detail-page', {
-					pageTitle: nation.name,
-					path: `/nations/${nation.id}`,
-					nations: nations,
-					nation: nation,
+				Player.find({ nation: nation.name }).then((players) => {
+					console.log(players);
+					res.render('nations/nation-detail-page', {
+						pageTitle: nation.name,
+						path: `/nations/${nation.id}`,
+						nations: nations,
+						nation: nation,
+						players: players,
+					});
 				});
 			});
 		})
