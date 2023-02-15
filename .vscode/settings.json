@@ -1,0 +1,20 @@
+{
+	"files.associations": {
+		"*.ejs": "html"
+	},
+	"[html]": {
+		"editor.formatOnSave": false
+	},
+	"liveSassCompile.settings.formats": [
+		{
+			"format": "expanded",
+			"extensionName": ".css",
+			"savePath": "/public/styles/css"
+		},
+		{
+			"extensionName": ".min.css",
+			"format": "compressed",
+			"savePath": "/public/styles/css"
+		}
+	]
+}

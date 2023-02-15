@@ -1,0 +1,22 @@
+{
+	"name": "project-2",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"start": "nodemon ./bin/www -e js,ejs,css,scss"
+	},
+	"dependencies": {
+		"assert": "^2.0.0",
+		"cookie-parser": "~1.4.4",
+		"debug": "~2.6.9",
+		"ejs": "^3.1.8",
+		"express": "^4.18.2",
+		"http-errors": "~1.6.3",
+		"mongodb": "^5.0.0",
+		"mongoose": "^6.9.1",
+		"morgan": "~1.9.1"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.20"
+	}
+}

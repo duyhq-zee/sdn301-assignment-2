@@ -1,0 +1,29 @@
+<%- include('../partials/head.ejs') %>
+  </head>
+
+  <body>
+    <%- include('../partials/navbar.ejs') %> 
+    <main>
+      <div class="d-flex align-items-center flex-column mt-4">
+        <h3 class="mb-3">Cập nhật quốc gia</h3>
+    
+        <form action="/nations/edit-nation/<%= nation.id %>" method="POST"
+          class="w-75 d-flex align-items-center flex-column">
+          <input type="text" id="name" name="name" class="form-control mb-2" placeholder="Tên" value="<%= nation.name %>">
+    
+          <input type="text" id="description" name="description" class="form-control mb-2" placeholder="Mô tả"
+            value="<%= nation.description %>">
+    
+          
+          <button type="submit" class="btn btn-sm btn-primary w-25 mt-3">Cập nhật</button>
+        </form>
+
+        <form action="/nations/remove-nation/<%= nation.id %>" method="POST"
+          class="w-75 d-flex align-items-center flex-column">
+          <button type="submit" class="btn btn-sm btn-primary w-25 mt-3">Xóa</button>
+        </form>
+    
+      </div>
+    </main>
+  </body>
+</html>

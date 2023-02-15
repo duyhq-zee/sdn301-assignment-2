@@ -1,0 +1,40 @@
+<%- include('../partials/head.ejs') %>
+		<link rel="stylesheet" href="/styles/css/nations.css">
+	</head>
+
+	<body>
+		<%- include('../partials/navbar.ejs') %>
+
+			<main>
+				<a href="/nations/add-nation" class="btn btn-primary mt-4">Thêm quốc gia</a>
+				<div class="nation-list mt-4">
+					<% if (nations.length> 0) { %>
+						<% nations.forEach(nation => { %>
+							<div class="nation-item">
+								<!-- <div class="image-container">
+									<a href="/nations/<%= nation.id %>">
+										<img src="<%= nation.imageUrl %>" alt="">
+									</a>
+								</div> -->
+
+								<div class="d-flex">
+									<a href="/nations/edit-nation/<%= nation.id %>" class="btn btn-warning p-1"><i class="bi bi-pencil-square"></i></a>
+
+									<!-- <form action="/nations/remove-nation" method="DELETE">
+										<button class="btn btn-danger p-1"><i class="bi bi-trash-fill"></i></button>
+									</form> -->
+								</div>
+								
+								<div class="content">
+									<div class="title-and-price">
+										<h3><%= nation.name %></h3>
+									</div>
+									<p class="description"><%= nation.description %></p>
+								</div>
+							</div>
+							<% }) %>
+					<% } %>
+				</div>
+			</main>
+	</body>
+</html>
