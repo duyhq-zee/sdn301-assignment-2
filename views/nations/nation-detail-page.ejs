@@ -1,0 +1,48 @@
+<%- include('../partials/head.ejs') %>
+		<link rel="stylesheet" href="/styles/css/nations.css">
+	</head>
+
+	<body>
+		<%- include('../partials/navbar.ejs') %>
+
+      <main>
+        <div class="container-fluid mt-4">
+          <div class="row">
+            <div class="col-4">
+              <a href="/nations/add-nation" class="btn btn-outline-primary mb-3">+ Thêm</a>
+              <div class="nation-list">
+                <% if (nations.length> 0) { %>
+                  <% nations.forEach(nation=> { %>
+                    <a href="/nations/<%= nation.id %>" class="nation-item mb-2 d-block">
+                      <div>
+                        <h3 class="m-0">
+                          <%= nation.name %>
+                        </h3>
+                        <p class="description m-0">
+                          <%= nation.description %>
+                        </p>
+                      </div>
+                    </a>
+                  <% }) %>
+                <% } %>
+              </div>
+            </div>
+            <div class="col-8">
+              <div>
+                <h3>
+                  <%= nation.name %>
+                </h3>
+                <p>
+                  <%= nation.description %>
+                </p>
+                <a href="/nations/edit-nation/<%= nation.id %>" class="btn btn-warning">Chỉnh sửa</a>
+      
+                <!-- Player list -->
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </main>
+	</body>
+</html>
