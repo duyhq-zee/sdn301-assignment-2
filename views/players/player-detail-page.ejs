@@ -38,10 +38,9 @@
                 <h3 class="m-0 col-8 fw-bold"><%= player.goals%></h3>
               </div>
               <div class="mt-4">
-                <form action="/players/remove-player/<%= player.id %>" method="POST" class="d-inline-block">
-                  <input type="hidden" name="id" value="<%= player.id %>">
-                  <button class="btn btn-danger">Xóa</button>
-                </form>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Xóa
+                </button>
                 <a href="/players/edit-player/<%= player.id %>" class="btn btn-warning">Chỉnh sửa</a>
               </div>
             </div>
@@ -49,5 +48,27 @@
         </div>
 			</main>
       <%- include('../partials/tooltip.ejs') %>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Xóa cầu thủ</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Xác nhận xóa cầu thủ <%= player.name %>?</p>
+            </div>
+            <div class="modal-footer">
+              <form action="/players/remove-player/<%= player.id %>" method="POST" class="d-inline-block">
+                <input type="hidden" name="id" value="<%= player.id %>">
+                <button class="btn btn-danger">Xóa</button>
+              </form>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            </div>
+          </div>
+        </div>
+      </div>
 	</body>
 </html>

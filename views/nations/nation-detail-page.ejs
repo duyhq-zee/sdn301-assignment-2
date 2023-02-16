@@ -12,10 +12,9 @@
             <%- include('../partials/nations/nation-list.ejs') %>
             <div class="col-8 position-relative nation-detail-container p-4">
               <div class="position-absolute buttons">
-                <form action="/nations/remove-nation/<%= nation.id %>" method="POST" class="d-inline-block">
-                  <input type="hidden" name="id" value="<%= nation.id %>">
-                  <button class="btn btn-danger">Xóa</button>
-                </form>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Xóa
+                </button>
                 <a href="/nations/edit-nation/<%= nation.id %>" class="btn btn-warning">Chỉnh sửa</a>
               </div>
               <div>
@@ -36,7 +35,27 @@
             </div>
           </div>
         </div>
-      
       </main>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Xóa quốc gia</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Xác nhận xóa quốc gia <%= nation.name %>?</p>
+            </div>
+            <div class="modal-footer">
+              <form action="/nations/remove-nation/<%= nation.id %>" method="POST" class="d-inline-block">
+                <input type="hidden" name="id" value="<%= nation.id %>">
+                <button class="btn btn-danger">Xóa</button>
+              </form>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            </div>
+          </div>
+        </div>
+      </div>
 	</body>
 </html>

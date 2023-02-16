@@ -17,7 +17,7 @@
               <form action="/players/edit-player/<%= player.id %>" method="POST" class="d-flex flex-column align-items-end">
                 <div class="player-property row w-100">
                   <h3 class="m-0 col-4">Tên</h3>
-                  <input type="text" class="col-7" name="name" value="<%= player.name %>"/>
+                  <input type="text" class="col-7" name="name" value="<%= player.name %>" required/>
                   <input type="checkbox" name="isCaptain" id="" class="col-1" <%= player.isCaptain ? 'checked' : '' %> value='true' data-bs-toggle="tooltip" data-bs-placement="top" title="Is this player captain?">
                 </div>
                 
@@ -31,7 +31,7 @@
                 </div>
                 <div class="player-property row w-100">
                   <h3 class="m-0 col-4">Quốc tịch</h3>
-                  <input type="text" class="col-8" name="nation" value="<%= player.nation %>" />
+                  <input type="text" class="col-8" name="nation" value="<%= player.nation %>" required/>
                 </div>
                 <div class="row player-property w-100">
                     <h3 class="m-0 col-2">Vị trí</h3>
@@ -40,8 +40,6 @@
                     <h3 class="m-0 col-4">Số bàn thắng</h3>
                     <input type="text" class="col-2" name="goals" value="<%= player.goals %>" />
                 </div>
-                
-
 
                 <button class="btn btn-primary mt-4">Lưu</button>
               </form>

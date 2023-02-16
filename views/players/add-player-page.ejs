@@ -13,7 +13,7 @@
               <form action="/players/add-player/" method="POST" class="d-flex flex-column align-items-end">
                 <div class="player-property row w-100">
                   <h3 class="col-4">Tên</h3>
-                  <input type="text" class="col-7" name="name" />
+                  <input type="text" class="col-7" name="name" required/>
                   <input type="checkbox" name="isCaptain" id="" class="col-1" value="true" data-bs-toggle="tooltip" data-bs-placement="top" title="Is this player captain?">
                 </div>
                 
@@ -23,7 +23,7 @@
                 </div>
                 <div class="player-property row w-100">
                   <h3 class="col-4">Quốc tịch</h3>
-                  <input type="text" class="col-8" name="nation" />
+                  <input type="text" class="col-8" name="nation" required />
                 </div>
                 <div class="player-property row w-100">
                   <h3 class="col-4">Vị trí</h3>
