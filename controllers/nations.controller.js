@@ -41,7 +41,7 @@ exports.getNationById = (req, res, next) => {
 exports.getAddNation = (req, res, next) => {
 	Nation.find()
 		.then((nations) => {
-			res.render('nations/add-nation', {
+			res.render('nations/add-nation-page', {
 				pageTitle: 'Thêm quốc gia',
 				path: `/nations/add-nation`,
 				nations: nations,
@@ -71,7 +71,7 @@ exports.getEditNation = (req, res, next) => {
 	Nation.find()
 		.then((nations) => {
 			Nation.findById(req.params.nationId).then((nation) => {
-				res.render('nations/edit-nation', {
+				res.render('nations/edit-nation-page', {
 					pageTitle: nation.name,
 					path: `/nations/edit-nation/${nation.id}`,
 					nations: nations,
