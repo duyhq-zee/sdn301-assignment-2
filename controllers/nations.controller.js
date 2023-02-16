@@ -1,10 +1,10 @@
 const Nation = require('../models/nation.model');
+const Player = require('../models/player.model');
 
 exports.getNations = (req, res, next) => {
 	Nation.find()
 		.then((nations) => {
-			// console.log(nations);
-			res.render('nations/nation-list', {
+			res.render('nations/nation-list-page', {
 				nations: nations,
 				pageTitle: 'Các quốc gia',
 				path: '/nations',
@@ -17,16 +17,40 @@ exports.getNations = (req, res, next) => {
 };
 
 exports.getNationById = (req, res, next) => {
-	res.end(
-		'Will send details of the nation: ' + req.params.nationId + ' to you!'
-	);
+	Nation.find()
+		.then((nations) => {
+			Nation.findById(req.params.nationId).then((nation) => {
+				Player.find({ nation: nation.name }).then((players) => {
+					console.log(players);
+					res.render('nations/nation-detail-page', {
+						pageTitle: nation.name,
+						path: `/nations/${nation.id}`,
+						nations: nations,
+						nation: nation,
+						players: players,
+					});
+				});
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+			res.end('Error');
+		});
 };
 
 exports.getAddNation = (req, res, next) => {
-	res.render('nations/add-nation', {
-		pageTitle: 'Thêm quốc gia',
-		path: '/nations',
-	});
+	Nation.find()
+		.then((nations) => {
+			res.render('nations/add-nation-page', {
+				pageTitle: 'Thêm quốc gia',
+				path: `/nations/add-nation`,
+				nations: nations,
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+			res.end('Error');
+		});
 };
 
 exports.postAddNation = (req, res, next) => {
@@ -44,13 +68,21 @@ exports.postAddNation = (req, res, next) => {
 // };
 
 exports.getEditNation = (req, res, next) => {
-	Nation.findById(req.params.nationId).then((nation) => {
-		res.render('nations/edit-nation', {
-			pageTitle: 'Thêm quốc gia',
-			path: '/nations',
-			nation: nation,
+	Nation.find()
+		.then((nations) => {
+			Nation.findById(req.params.nationId).then((nation) => {
+				res.render('nations/edit-nation-page', {
+					pageTitle: nation.name,
+					path: `/nations/edit-nation/${nation.id}`,
+					nations: nations,
+					nation: nation,
+				});
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+			res.end('Error');
 		});
-	});
 };
 
 exports.postEditNation = (req, res, next) => {
@@ -61,7 +93,7 @@ exports.postEditNation = (req, res, next) => {
 
 			nation.save().then((doc) => {
 				console.log(doc);
-				res.redirect('/nations');
+				res.redirect(`/nations/${nation.id}`);
 			});
 		})
 		.catch((err) => {

@@ -1,12 +1,28 @@
 <header class="main-header">
 	<nav class="navbar">
-    <a href="/nations" class="logo"
-      >
-			<!-- <img src="/images/fan.png" alt="" /> -->
-      <h3 class="m-0">FPT88</h3></a
-    >
+		<div class="d-flex align-items-center">
+			<a href="/nations" class="logo"
+				>
+				<!-- <img src="/images/fan.png" alt="" /> -->
+				<h3 class="m-0">FPT88</h3></a
+			>
+			<ul class="left-nav">
+				<a href="/nations" class="user-btn <%= path.includes('nations') ? 'active' : '' %>" >
+					<li class="">
+						Quốc gia
+					</li>
+				</a>
+				
+				<a href="/players" class="<%= path.includes('players') ? 'active' : '' %>">
+					<li class="user-btn">
+						Cầu thủ
+					</li>
+				</a>
+			</ul>
+		</div>
 
-		<ul class="right-nav">
+
+		<!-- <ul class="right-nav">
 			<li class="user-btn">
 				<i class="bi bi-person"></i>
 				<ul class="user-nav-menu">
@@ -17,6 +33,6 @@
 			<li>
 				<a href="/cart"><i class="bi bi-cart"></i></a>
 			</li>
-		</ul>
+		</ul> -->
 	</nav>
 </header>

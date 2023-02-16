@@ -3,32 +3,24 @@ const router = express.Router();
 
 const playerController = require('../controllers/players.controller');
 
-router.use('/', (req, res, next) => {
-	res.statusCode = 202;
-	res.setHeader('Content-Type', 'text/plain');
-	next();
-});
-
-router.get('/', playerController.getAllPlayers);
-
-router.post('/', playerController.postAddOnePlayer);
-
-// router.put('/', (req, res, next) => {
-// 	res.statusCode = 403;
-// 	res.end('PUT operation not supported on /players');
+// router.use('/', (req, res, next) => {
+// 	res.statusCode = 202;
+// 	res.setHeader('Content-Type', 'text/plain');
+// 	next();
 // });
 
-router.delete('/', playerController.deleteRemoveOnePlayer);
+router.get('/', playerController.getPlayers);
+
+router.get('/add-player', playerController.getAddPlayer);
+
+router.post('/add-player', playerController.postAddPlayer);
+
+router.get('/edit-player/:playerId', playerController.getEditPlayer);
+
+router.post('/edit-player/:playerId', playerController.postEditPlayer);
+
+router.post('/remove-player/:playerId', playerController.postRemovePlayer);
 
 router.get('/:playerId', playerController.getPlayerById);
-
-// router.post('/:playerId', (req, res, next) => {
-// 	res.statusCode = 403;
-// 	res.end(`POST operation not supported on /players/${req.params.playerId}`);
-// });
-
-router.put('/:playerId', playerController.putUpdateOnePlayer);
-
-router.delete('/:playerId', playerController.deleteRemoveOnePlayer);
 
 module.exports = router;

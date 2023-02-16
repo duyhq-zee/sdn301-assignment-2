@@ -1,0 +1,34 @@
+.player-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+.player-item {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 6px;
+}
+.player-item .image-container {
+  position: relative;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.player-item .image-container img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 4px;
+}
+.player-item .image-container:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+.player-item .content {
+  width: 100%;
+}/*# sourceMappingURL=players.css.map */

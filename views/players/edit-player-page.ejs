@@ -1,0 +1,51 @@
+<%- include('../partials/head.ejs') %>
+		<link rel="stylesheet" href="/styles/css/player-detail.css">
+	</head>
+
+	<body>
+		<%- include('../partials/navbar.ejs') %>
+
+			<main>
+				<div class="main-container container-fluid mt-4">
+          <div class="row w-100 m-0">
+            <div class="col-5 image-container p-0">
+              <img src="<%= player.imageUrl %>" alt="">
+            </div>
+            <div class="col-7 container-fluid content">
+              <form action="/players/edit-player/<%= player.id %>" method="POST" class="d-flex flex-column align-items-end">
+                <div class="player-property row w-100">
+                  <h3 class="col-4">Tên</h3>
+                  <input type="text" class="col-7" name="name" value="<%= player.name %>"/>
+                  <input type="checkbox" name="isCaptain" id="" class="col-1" value="true" checked="<%= player.isCaptain %>">
+                </div>
+                
+                <div class="player-property row w-100">
+                  <h3 class="col-4">Câu lạc bộ</h3>
+                  <input type="text" class="col-8"name="club" value="<%= player.club %>" />
+                </div>
+                <div class="player-property row w-100">
+                  <h3 class="col-4">Quốc tịch</h3>
+                  <input type="text" class="col-8" name="nation" value="<%= player.nation %>" />
+                </div>
+                <div class="player-property row w-100">
+                  <h3 class="col-4">Vị trí</h3>
+                  <input type="text" class="col-8" name="position" value="<%= player.position %>" />
+                </div>
+                <div class="player-property row w-100">
+                  <h3 class="col-4">Số bàn thắng</h3>
+                  <input type="text" class="col-8" name="goals" value="<%= player.goals %>" />
+                </div>
+                <!-- <div class="player-property row">
+                  <h3 class="col-4">URL hình ảnh</h3>
+                  <input type="text" class="col-8" name="imageUrl" />
+                </div> -->
+
+
+                <button class="btn btn-primary mt-4">Lưu</button>
+              </form>
+            </div>
+          </div>
+        </div>
+			</main>
+	</body>
+</html>
