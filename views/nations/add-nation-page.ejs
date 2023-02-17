@@ -8,18 +8,14 @@
       <div class="container-fluid mt-4">
         <div class="row">
           <%- include('../partials/nations/nation-list.ejs') %>
-          <div class="col-8">
-            <div>
-              <form action="/nations/add-nation" method="POST" class="w-100 d-flex align-items-end flex-column">
-                <input type="text" id="name" name="name" class="form-control mb-2" placeholder="Tên">
-          
-                <input type="text" id="description" name="description" class="form-control mb-2" placeholder="Mô tả">
-          
-                <button type="submit" class="btn btn-sm btn-primary w-25 mt-3">Thêm</button>
-              </form>
-    
-              <!-- Player list -->
-            </div>
+          <div class="col-8 add-nation-form-container">
+            <form action="/nations/add-nation" method="POST" class="w-100 d-flex align-items-end flex-column">
+              <input type="text" id="name" name="name" class="form-control mb-2" placeholder="Tên">
+        
+              <input type="text" id="description" name="description" class="form-control mb-2" placeholder="Mô tả">
+        
+              <button type="submit" class="btn btn-sm btn-primary w-25 mt-3">Thêm</button>
+            </form>
           </div>
         </div>
       </div>
