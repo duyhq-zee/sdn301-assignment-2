@@ -31,7 +31,15 @@
                 </div>
                 <div class="player-property row w-100">
                   <h3 class="m-0 col-4">Quốc tịch</h3>
-                  <input type="text" class="col-8" name="nation" value="<%= player.nation %>" required/>
+                  <!-- <input type="text" class="col-8" name="nation" value="<%= player.nation %>" required/> -->
+                  <div class="col-8 p-0">
+                    <select class="w-100 h-100" name="nation" id="">
+                      <% nations.map((nation) => { %>
+                        <option value="<%= nation.name %>" <%= player.nation == nation.name ? 'selected' : '' %>><%= nation.name %></option>
+                      <% }) %>
+  
+                    </select>
+                  </div>
                 </div>
                 <div class="row player-property w-100">
                     <h3 class="m-0 col-2">Vị trí</h3>

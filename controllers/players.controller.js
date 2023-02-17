@@ -1,4 +1,5 @@
 const Player = require('../models/player.model');
+const Nation = require('../models/nation.model');
 
 exports.getPlayers = (req, res, next) => {
 	Player.find().then((players) => {
@@ -11,10 +12,18 @@ exports.getPlayers = (req, res, next) => {
 };
 
 exports.getAddPlayer = (req, res, next) => {
-	res.render('players/add-player-page', {
-		path: `/players/add-player`,
-		pageTitle: 'Thêm cầu thủ',
-	});
+	Nation.find()
+		.then((nations) => {
+			res.render('players/add-player-page', {
+				path: `/players/add-player`,
+				pageTitle: 'Thêm cầu thủ',
+				nations: nations,
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+			res.end('Error');
+		});
 };
 
 exports.postAddPlayer = (req, res, next) => {
@@ -26,9 +35,10 @@ exports.postAddPlayer = (req, res, next) => {
 	newPlayer.nation = req.body.nation;
 	newPlayer.position = req.body.position;
 	newPlayer.goals = +req.body.goals;
-	newPlayer.save();
 
-	res.redirect('/players');
+	newPlayer.save().then(() => {
+		res.redirect('/players');
+	});
 };
 
 exports.getPlayerById = (req, res, next) => {
@@ -43,13 +53,21 @@ exports.getPlayerById = (req, res, next) => {
 };
 
 exports.getEditPlayer = (req, res, next) => {
-	Player.findById(req.params.playerId).then((player) => {
-		res.render('players/edit-player-page', {
-			path: `/players/edit-player/${req.params.playerId}`,
-			pageTitle: player.name,
-			player: player,
+	Nation.find()
+		.then((nations) => {
+			Player.findById(req.params.playerId).then((player) => {
+				res.render('players/edit-player-page', {
+					path: `/players/edit-player/${req.params.playerId}`,
+					pageTitle: player.name,
+					player: player,
+					nations: nations,
+				});
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+			res.end('Error');
 		});
-	});
 };
 
 exports.postEditPlayer = (req, res, next) => {
