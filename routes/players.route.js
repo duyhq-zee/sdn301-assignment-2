@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const isAuth = require('../middlewares/isAuth');
 
 const playerController = require('../controllers/players.controller');
 
@@ -11,15 +12,19 @@ const playerController = require('../controllers/players.controller');
 
 router.get('/', playerController.getPlayers);
 
-router.get('/add-player', playerController.getAddPlayer);
+router.get('/add-player', isAuth, playerController.getAddPlayer);
 
-router.post('/add-player', playerController.postAddPlayer);
+router.post('/add-player', isAuth, playerController.postAddPlayer);
 
-router.get('/edit-player/:playerId', playerController.getEditPlayer);
+router.get('/edit-player/:playerId', isAuth, playerController.getEditPlayer);
 
-router.post('/edit-player/:playerId', playerController.postEditPlayer);
+router.post('/edit-player/:playerId', isAuth, playerController.postEditPlayer);
 
-router.post('/remove-player/:playerId', playerController.postRemovePlayer);
+router.post(
+	'/remove-player/:playerId',
+	isAuth,
+	playerController.postRemovePlayer
+);
 
 router.get('/:playerId', playerController.getPlayerById);
 
