@@ -7,7 +7,7 @@ exports.getNations = (req, res, next) => {
 			res.render('nations/nation-list-page', {
 				path: '/nations',
 				pageTitle: 'Các quốc gia',
-				isAuthenticated: req.session.isLogin,
+
 				nations: nations,
 			});
 		})
@@ -26,7 +26,7 @@ exports.getNationById = (req, res, next) => {
 					res.render('nations/nation-detail-page', {
 						path: `/nations/${nation.id}`,
 						pageTitle: nation.name,
-						isAuthenticated: req.session.isLogin,
+
 						nations: nations,
 						nation: nation,
 						players: players,
@@ -46,7 +46,7 @@ exports.getAddNation = (req, res, next) => {
 			res.render('nations/add-nation-page', {
 				path: `/nations/add-nation`,
 				pageTitle: 'Thêm quốc gia',
-				isAuthenticated: req.session.isLogin,
+
 				nations: nations,
 			});
 		})
@@ -77,7 +77,7 @@ exports.getEditNation = (req, res, next) => {
 				res.render('nations/edit-nation-page', {
 					path: `/nations/edit-nation/${nation.id}`,
 					pageTitle: nation.name,
-					isAuthenticated: req.session.isLogin,
+
 					nations: nations,
 					nation: nation,
 				});

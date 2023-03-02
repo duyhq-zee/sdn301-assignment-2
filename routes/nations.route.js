@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const isAuth = require('../middlewares/isAuth');
 
 const nationsController = require('../controllers/nations.controller');
 
@@ -11,15 +12,19 @@ const nationsController = require('../controllers/nations.controller');
 
 router.get('/', nationsController.getNations);
 
-router.post('/add-nation', nationsController.postAddNation);
+router.post('/add-nation', isAuth, nationsController.postAddNation);
 
-router.get('/add-nation', nationsController.getAddNation);
+router.get('/add-nation', isAuth, nationsController.getAddNation);
 
-router.get('/edit-nation/:nationId', nationsController.getEditNation);
+router.get('/edit-nation/:nationId', isAuth, nationsController.getEditNation);
 
-router.post('/edit-nation/:nationId', nationsController.postEditNation);
+router.post('/edit-nation/:nationId', isAuth, nationsController.postEditNation);
 
-router.post('/remove-nation/:nationId', nationsController.postRemoveNation);
+router.post(
+	'/remove-nation/:nationId',
+	isAuth,
+	nationsController.postRemoveNation
+);
 
 router.get('/:nationId', nationsController.getNationById);
 
