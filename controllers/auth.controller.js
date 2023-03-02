@@ -9,7 +9,7 @@ exports.getLogIn = (req, res, next) => {
 	} else {
 		message = null;
 	}
-	res.render('auth/login', {
+	res.render('auth/log-in-page', {
 		path: '/login',
 		pageTitle: 'Login',
 		errorMessage: message,
@@ -28,7 +28,7 @@ exports.getSignUp = (req, res, next) => {
 	} else {
 		message = null;
 	}
-	res.render('auth/signup', {
+	res.render('auth/sign-up-page', {
 		path: '/signup',
 		pageTitle: 'Signup',
 		errorMessage: message,
@@ -48,7 +48,7 @@ exports.postLogIn = (req, res, next) => {
 
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		return res.status(422).render('auth/login', {
+		return res.status(422).render('auth/log-in-page', {
 			path: '/login',
 			pageTitle: 'Login',
 			errorMessage: errors.array()[0].msg,
@@ -63,7 +63,7 @@ exports.postLogIn = (req, res, next) => {
 	User.findOne({ email: email })
 		.then((user) => {
 			if (!user) {
-				return res.status(422).render('auth/login', {
+				return res.status(422).render('auth/log-in-page', {
 					path: '/login',
 					pageTitle: 'Login',
 					errorMessage: 'Invalid email or password.',
@@ -88,7 +88,7 @@ exports.postLogIn = (req, res, next) => {
 							res.redirect('/');
 						});
 					}
-					return res.status(422).render('auth/login', {
+					return res.status(422).render('auth/log-in-page', {
 						path: '/login',
 						pageTitle: 'Login',
 						errorMessage: 'Invalid email or password.',
@@ -117,7 +117,7 @@ exports.postSignUp = (req, res, next) => {
 
 	if (!errors.isEmpty()) {
 		console.log(errors.array());
-		return res.status(422).render('auth/signup', {
+		return res.status(422).render('auth/sign-up-page', {
 			path: '/signup',
 			pageTitle: 'Signup',
 			errorMessage: errors.array()[0].msg,

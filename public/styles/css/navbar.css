@@ -2,7 +2,7 @@
   padding: 0 12%;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0px 2px 2px 0px #e0e0e0;
+  box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
 }
 .main-header .navbar .logo {
@@ -19,8 +19,9 @@
 }
 .main-header .navbar .logo h3 {
   display: inline-block;
+  font-weight: bold;
   height: 100%;
-  color: #1976d2;
+  color: #08979c;
 }
 .main-header .navbar ul {
   display: flex;
@@ -28,44 +29,15 @@
   padding: 0;
 }
 .main-header .navbar ul a.active {
-  border-bottom: 3px solid #1976d2;
+  border-bottom: 3px solid #08979c;
 }
 .main-header .navbar ul a:hover {
-  background-color: #e3f2fd;
+  background-color: rgba(228, 240, 238, 0.5568627451);
 }
 .main-header .navbar ul li {
   display: flex;
   align-items: center;
   padding: 16px 16px;
-}
-.main-header .navbar .right-nav i {
-  width: 100%;
-  font-size: 24px;
-}
-.main-header .navbar .right-nav .user-btn {
-  position: relative;
-}
-.main-header .navbar .right-nav .user-btn .user-nav-menu {
-  display: none !important;
-  z-index: 99;
-  position: absolute;
-  top: 65px;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  box-shadow: 0 0 2px 1px #e0e0e0;
-  border-radius: 2px;
-  width: 164px;
-}
-.main-header .navbar .right-nav .user-btn .user-nav-menu li {
-  padding: 8px 16px;
-}
-.main-header .navbar .right-nav .user-btn .user-nav-menu li:hover {
-  background-color: #bbdefb;
-}
-.main-header .navbar .right-nav .user-btn:hover .user-nav-menu {
-  display: flex !important;
 }
 .main-header .navbar .left-nav i {
   width: 100%;
@@ -95,6 +67,60 @@
 }
 .main-header .navbar .left-nav .user-btn:hover .user-nav-menu {
   display: flex !important;
+}
+.main-header .navbar .right-nav .log-in-btn-container,
+.main-header .navbar .right-nav .sign-up-btn-container {
+  padding: 0;
+}
+.main-header .navbar .right-nav .log-in-btn-container a:hover,
+.main-header .navbar .right-nav .sign-up-btn-container a:hover {
+  background: none;
+}
+.main-header .navbar .right-nav i {
+  width: 100%;
+  font-size: 24px;
+}
+.main-header .navbar .right-nav .user-btn {
+  padding: 10px 12px;
+  height: 100%;
+  position: relative;
+}
+.main-header .navbar .right-nav .user-btn .user-nav-menu {
+  display: none !important;
+  z-index: 99;
+  position: absolute;
+  top: 56px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  box-shadow: 0 0 2px 1px #e0e0e0;
+  border-radius: 2px;
+  width: 164px;
+}
+.main-header .navbar .right-nav .user-btn .user-nav-menu li {
+  padding: 0;
+}
+.main-header .navbar .right-nav .user-btn .user-nav-menu li:hover {
+  background-color: rgba(228, 240, 238, 0.5568627451);
+}
+.main-header .navbar .right-nav .user-btn .user-nav-menu .log-out-btn {
+  display: inline-block;
+  padding: 8px;
+  text-align: left;
+}
+.main-header .navbar .right-nav .user-btn:hover .user-nav-menu {
+  display: flex !important;
+}
+.main-header .navbar .right-nav .log-in-btn {
+  color: #08979c;
+  margin-right: 16px;
+}
+.main-header .navbar .right-nav .sign-up-btn {
+  color: #08979c;
+  border: #08979c 2px solid;
+  padding: 4px 12px;
+  border-radius: 8px;
 }
 .main-header .navbar a {
   color: #000;

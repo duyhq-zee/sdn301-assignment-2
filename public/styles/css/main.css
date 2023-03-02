@@ -7,7 +7,7 @@
 
 body {
   min-height: 100vh;
-  background-color: #f0f0f0 !important;
+  background-color: #fcfcfc !important;
 }
 
 main {
@@ -19,5 +19,6 @@ h3 {
 }
 
 .btn-primary {
-  background-color: #1976d2 !important;
+  background-color: #08979c !important;
+  border: none !important;
 }/*# sourceMappingURL=main.css.map */
