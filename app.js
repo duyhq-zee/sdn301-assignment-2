@@ -64,6 +64,9 @@ app.use(authRoute);
 
 app.use('/nations', nationsRoute);
 app.use('/players', playersRoute);
+app.use('/not-admin', (req, res, next) => {
+	res.render('not-admin');
+});
 app.use('/', (req, res, next) => {
 	res.redirect('/nations');
 });

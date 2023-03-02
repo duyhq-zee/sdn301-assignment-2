@@ -36,14 +36,15 @@ exports.getSignUp = (req, res, next) => {
 			email: '',
 			password: '',
 			confirmPassword: '',
+			name: '',
+			yearOfBirth: '',
 		},
 		validationErrors: [],
 	});
 };
 
 exports.postLogIn = (req, res, next) => {
-	const email = req.body.email;
-	const password = req.body.password;
+	const { email, password, name, yearOfBirth } = req.body;
 
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
@@ -69,6 +70,8 @@ exports.postLogIn = (req, res, next) => {
 					oldInput: {
 						email: email,
 						password: password,
+						name: name,
+						yearOfBirth: yearOfBirth,
 					},
 					validationErrors: [],
 				});
@@ -107,8 +110,7 @@ exports.postLogIn = (req, res, next) => {
 exports.postSignUp = (req, res, next) => {
 	console.log('OK');
 
-	const email = req.body.email;
-	const password = req.body.password;
+	const { email, password, name, yearOfBirth } = req.body;
 
 	const errors = validationResult(req);
 	console.log(errors);
@@ -123,6 +125,8 @@ exports.postSignUp = (req, res, next) => {
 				email: email,
 				password: password,
 				confirmPassword: req.body.confirmPassword,
+				name: name,
+				yearOfBirth: yearOfBirth,
 			},
 			validationErrors: errors.array(),
 		});
@@ -134,7 +138,9 @@ exports.postSignUp = (req, res, next) => {
 			const user = new User({
 				email: email,
 				password: hashedPassword,
-				cart: { items: [] },
+				name: name,
+				yearOfBirth: yearOfBirth,
+				isAdmin: false,
 			});
 			return user.save();
 		})

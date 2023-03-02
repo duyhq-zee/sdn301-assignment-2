@@ -38,6 +38,25 @@
                       id="confirmPassword" 
                       value="<%= oldInput.confirmPassword %>">
               </div>
+              <div class="form-control">
+                <label for="password">Name</label>
+                <input 
+                    class="<%= validationErrors.find(e => e.param === 'name') ? 'invalid' : '' %>"
+                    type="text" 
+                    name="name" 
+                    id="name" 
+                    value="<%= oldInput.name %>">
+            </div>
+
+            <div class="form-control">
+                <label for="password">YOB</label>
+                <input 
+                    class="<%= validationErrors.find(e => e.param === 'yearOfBirth') ? 'invalid' : '' %>"
+                    type="text" 
+                    name="yearOfBirth" 
+                    id="yearOfBirth" 
+                    value="<%= oldInput.yearOfBirth %>">
+            </div>
 
               <button class="btn" type="submit">Signup</button>
           </form>
