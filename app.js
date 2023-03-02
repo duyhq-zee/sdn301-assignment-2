@@ -3,9 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-const nationsRoute = require('./routes/nations.route');
-const playersRoute = require('./routes/players.route');
+const session = require('express-session');
 
 var app = express();
 
@@ -19,8 +17,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(
+	session({
+		secret: 'My secret',
+		resave: false,
+		saveUninitialized: false,
+	})
+);
+
+const nationsRoute = require('./routes/nations.route');
+const playersRoute = require('./routes/players.route');
+const authRoute = require('./routes/auth.route');
+
 app.use('/nations', nationsRoute);
 app.use('/players', playersRoute);
+app.use('/', authRoute);
 app.use('/', (req, res, next) => {
 	res.redirect('/nations');
 });

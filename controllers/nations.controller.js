@@ -5,9 +5,10 @@ exports.getNations = (req, res, next) => {
 	Nation.find()
 		.then((nations) => {
 			res.render('nations/nation-list-page', {
-				nations: nations,
-				pageTitle: 'Các quốc gia',
 				path: '/nations',
+				pageTitle: 'Các quốc gia',
+				isAuthenticated: req.session.isLogin,
+				nations: nations,
 			});
 		})
 		.catch((err) => {
@@ -23,8 +24,9 @@ exports.getNationById = (req, res, next) => {
 				Player.find({ nation: nation.name }).then((players) => {
 					console.log(players);
 					res.render('nations/nation-detail-page', {
-						pageTitle: nation.name,
 						path: `/nations/${nation.id}`,
+						pageTitle: nation.name,
+						isAuthenticated: req.session.isLogin,
 						nations: nations,
 						nation: nation,
 						players: players,
@@ -42,8 +44,9 @@ exports.getAddNation = (req, res, next) => {
 	Nation.find()
 		.then((nations) => {
 			res.render('nations/add-nation-page', {
-				pageTitle: 'Thêm quốc gia',
 				path: `/nations/add-nation`,
+				pageTitle: 'Thêm quốc gia',
+				isAuthenticated: req.session.isLogin,
 				nations: nations,
 			});
 		})
@@ -72,8 +75,9 @@ exports.getEditNation = (req, res, next) => {
 		.then((nations) => {
 			Nation.findById(req.params.nationId).then((nation) => {
 				res.render('nations/edit-nation-page', {
-					pageTitle: nation.name,
 					path: `/nations/edit-nation/${nation.id}`,
+					pageTitle: nation.name,
+					isAuthenticated: req.session.isLogin,
 					nations: nations,
 					nation: nation,
 				});

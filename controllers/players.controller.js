@@ -6,6 +6,7 @@ exports.getPlayers = (req, res, next) => {
 		res.render('players/player-list-page', {
 			path: '/players',
 			pageTitle: 'Danh sách cầu thủ',
+			isAuthenticated: req.session.isLogin,
 			players: players,
 		});
 	});
@@ -17,6 +18,7 @@ exports.getAddPlayer = (req, res, next) => {
 			res.render('players/add-player-page', {
 				path: `/players/add-player`,
 				pageTitle: 'Thêm cầu thủ',
+				isAuthenticated: req.session.isLogin,
 				nations: nations,
 			});
 		})
@@ -47,6 +49,7 @@ exports.getPlayerById = (req, res, next) => {
 		res.render('players/player-detail-page', {
 			path: `/players/${req.params.playerId}`,
 			pageTitle: player.name,
+			isAuthenticated: req.session.isLogin,
 			player: player,
 		});
 	});
@@ -59,6 +62,7 @@ exports.getEditPlayer = (req, res, next) => {
 				res.render('players/edit-player-page', {
 					path: `/players/edit-player/${req.params.playerId}`,
 					pageTitle: player.name,
+					isAuthenticated: req.session.isLogin,
 					player: player,
 					nations: nations,
 				});

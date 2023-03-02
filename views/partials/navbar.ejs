@@ -22,8 +22,8 @@
 		</div>
 
 
-		<!-- <ul class="right-nav">
-			<li class="user-btn">
+		<ul class="right-nav">
+			<!-- <li class="user-btn">
 				<i class="bi bi-person"></i>
 				<ul class="user-nav-menu">
 					<li><a href="/nations/add-nation">Thêm quốc gia</a></li>
@@ -32,7 +32,21 @@
 			</li>
 			<li>
 				<a href="/cart"><i class="bi bi-cart"></i></a>
-			</li>
-		</ul> -->
+			</li> -->
+			<% if (!isAuthenticated) { %>
+				<li class="main-header__item">
+						<a class="<%= path === '/login' ? 'active' : '' %>" href="/login">Đăng nhập</a>
+				</li>
+				<li class="main-header__item">
+						<a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup">Đăng kí</a>
+				</li>
+		<% } else { %>
+				<li class="main-header__item">
+						<form action="/logout" method="post">
+								<button class="btn" type="submit">Đăng xuất</button>
+						</form>
+				</li>
+		<% } %>
+		</ul>
 	</nav>
 </header>
