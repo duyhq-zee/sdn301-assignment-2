@@ -6,10 +6,11 @@
     <%- include('../partials/navbar.ejs') %>
 
       <main>
-          <!-- <% if (errorMessage) { %>
-              <div class="user-message user-message--error"><%= errorMessage %></div>
-          <% } %> -->
+          
           <form class="login-form mt-4 d-flex flex-column align-items-center" action="/signup" method="POST" novalidate>
+            <% if (errorMessage) { %>
+                <div class="error-message mb-3"><%= errorMessage %></div>
+            <% } %>
               <div class="w-50">
                   <label class="d-block" for="email">Email</label>
                   <input 

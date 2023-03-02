@@ -22,7 +22,6 @@ exports.getNationById = (req, res, next) => {
 		.then((nations) => {
 			Nation.findById(req.params.nationId).then((nation) => {
 				Player.find({ nation: nation.name }).then((players) => {
-					console.log(players);
 					res.render('nations/nation-detail-page', {
 						path: `/nations/${nation.id}`,
 						pageTitle: nation.name,
