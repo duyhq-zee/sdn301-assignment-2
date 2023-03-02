@@ -3,7 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
 const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 var app = express();
 
@@ -17,11 +19,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const store = new MongoDBStore({
+	uri: 'mongodb://localhost:27017/football',
+	collection: 'sessions',
+});
+
 app.use(
 	session({
 		secret: 'My secret',
 		resave: false,
 		saveUninitialized: false,
+		store: store,
 	})
 );
 
