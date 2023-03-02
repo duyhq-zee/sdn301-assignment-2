@@ -4,6 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const flash = require('connect-flash');
+
+const User = require('./models/user.model');
+
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
@@ -33,13 +37,33 @@ app.use(
 	})
 );
 
+app.use(flash());
+
+app.use((req, res, next) => {
+	if (!req.session.user) {
+		return next();
+	}
+	User.findById(req.session.user._id)
+		.then((user) => {
+			req.user = user;
+			next();
+		})
+		.catch((err) => console.log(err));
+});
+
+app.use((req, res, next) => {
+	res.locals.isAuthenticated = req.session.isLoggedIn;
+	next();
+});
+
 const nationsRoute = require('./routes/nations.route');
 const playersRoute = require('./routes/players.route');
 const authRoute = require('./routes/auth.route');
 
+app.use(authRoute);
+
 app.use('/nations', nationsRoute);
 app.use('/players', playersRoute);
-app.use('/', authRoute);
 app.use('/', (req, res, next) => {
 	res.redirect('/nations');
 });
