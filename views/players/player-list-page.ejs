@@ -6,7 +6,10 @@
 		<%- include('../partials/navbar.ejs') %>
 
 			<main>
-				<a href="/players/add-player" class="btn btn-primary mt-4">+ Thêm cầu thủ</a>
+				<h3 class="mt-4">Danh sách cầu thủ</h3>
+				<% if (isAdmin) { %>
+					<a href="/players/add-player" class="btn btn-primary mt-2">+ Thêm cầu thủ</a>
+				<% } %>
 				<div class="mt-4">
 					<%- include('../partials/players/player-list.ejs', {players: players}) %>
 				</div>

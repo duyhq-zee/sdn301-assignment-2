@@ -1,9 +1,10 @@
 <div class="col-4 p-0 pe-3">
   <div class="nation-list-column">
-    <!-- <a href="/nations/add-nation" class="btn btn-outline-primary mb-3">+ Thêm quốc gia</a> -->
-    <a href="/nations/add-nation" class="nation-item p-3 d-block add-nation-btn">
-      + Thêm quốc gia
-    </a>
+    <% if (isAdmin) { %>
+      <a href="/nations/add-nation" class="nation-item p-3 d-block add-nation-btn">
+        + Thêm quốc gia
+      </a>
+    <% } %>
     <div class="nation-list">
       <% if (nations.length> 0) { %>
         <% nations.forEach(nation=> { %>

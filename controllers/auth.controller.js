@@ -9,7 +9,7 @@ exports.getLogIn = (req, res, next) => {
 	} else {
 		message = null;
 	}
-	res.render('auth/login', {
+	res.render('auth/log-in-page', {
 		path: '/login',
 		pageTitle: 'Login',
 		errorMessage: message,
@@ -28,7 +28,7 @@ exports.getSignUp = (req, res, next) => {
 	} else {
 		message = null;
 	}
-	res.render('auth/signup', {
+	res.render('auth/sign-up-page', {
 		path: '/signup',
 		pageTitle: 'Signup',
 		errorMessage: message,
@@ -36,18 +36,19 @@ exports.getSignUp = (req, res, next) => {
 			email: '',
 			password: '',
 			confirmPassword: '',
+			name: '',
+			yearOfBirth: '',
 		},
 		validationErrors: [],
 	});
 };
 
 exports.postLogIn = (req, res, next) => {
-	const email = req.body.email;
-	const password = req.body.password;
+	const { email, password, name, yearOfBirth } = req.body;
 
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		return res.status(422).render('auth/login', {
+		return res.status(422).render('auth/log-in-page', {
 			path: '/login',
 			pageTitle: 'Login',
 			errorMessage: errors.array()[0].msg,
@@ -62,13 +63,15 @@ exports.postLogIn = (req, res, next) => {
 	User.findOne({ email: email })
 		.then((user) => {
 			if (!user) {
-				return res.status(422).render('auth/login', {
+				return res.status(422).render('auth/log-in-page', {
 					path: '/login',
 					pageTitle: 'Login',
-					errorMessage: 'Invalid email or password.',
+					errorMessage: 'Email hoặc mật khẩu không chính xác',
 					oldInput: {
 						email: email,
 						password: password,
+						name: name,
+						yearOfBirth: yearOfBirth,
 					},
 					validationErrors: [],
 				});
@@ -80,15 +83,13 @@ exports.postLogIn = (req, res, next) => {
 						req.session.isLoggedIn = true;
 						req.session.user = user;
 						return req.session.save((err) => {
-							console.log(req.session);
-							console.log(err);
 							res.redirect('/');
 						});
 					}
-					return res.status(422).render('auth/login', {
+					return res.status(422).render('auth/log-in-page', {
 						path: '/login',
 						pageTitle: 'Login',
-						errorMessage: 'Invalid email or password.',
+						errorMessage: 'Email hoặc mật khẩu không chính xác',
 						oldInput: {
 							email: email,
 							password: password,
@@ -105,17 +106,14 @@ exports.postLogIn = (req, res, next) => {
 };
 
 exports.postSignUp = (req, res, next) => {
-	console.log('OK');
-
-	const email = req.body.email;
-	const password = req.body.password;
+	const { email, password, name, yearOfBirth } = req.body;
 
 	const errors = validationResult(req);
 	console.log(errors);
 
 	if (!errors.isEmpty()) {
 		console.log(errors.array());
-		return res.status(422).render('auth/signup', {
+		return res.status(422).render('auth/sign-up-page', {
 			path: '/signup',
 			pageTitle: 'Signup',
 			errorMessage: errors.array()[0].msg,
@@ -123,6 +121,8 @@ exports.postSignUp = (req, res, next) => {
 				email: email,
 				password: password,
 				confirmPassword: req.body.confirmPassword,
+				name: name,
+				yearOfBirth: yearOfBirth,
 			},
 			validationErrors: errors.array(),
 		});
@@ -134,7 +134,9 @@ exports.postSignUp = (req, res, next) => {
 			const user = new User({
 				email: email,
 				password: hashedPassword,
-				cart: { items: [] },
+				name: name,
+				yearOfBirth: yearOfBirth,
+				isAdmin: false,
 			});
 			return user.save();
 		})

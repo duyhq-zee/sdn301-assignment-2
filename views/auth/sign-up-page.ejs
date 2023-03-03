@@ -1,0 +1,65 @@
+<%- include('../partials/head.ejs') %>
+    <link rel="stylesheet" href="/styles/css/auth.css">
+  </head>
+
+  <body>
+    <%- include('../partials/navbar.ejs') %>
+
+      <main>
+          
+          <form class="login-form mt-4 d-flex flex-column align-items-center" action="/signup" method="POST" novalidate>
+            <% if (errorMessage) { %>
+                <div class="error-message mb-3"><%= errorMessage %></div>
+            <% } %>
+              <div class="w-50">
+                  <label class="d-block" for="email">Email</label>
+                  <input 
+                      class="d-block w-100 mt-1 <%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
+                      type="email" 
+                      name="email" 
+                      id="email" 
+                      value="<%= oldInput.email %>">
+              </div>
+              <div class="w-50 mt-3">
+                  <label class="d-block" for="password">Mật khẩu</label>
+                  <input 
+                      class="d-block w-100 mt-1 <%= validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %>"
+                      type="password" 
+                      name="password" 
+                      id="password" 
+                      value="<%= oldInput.password %>">
+              </div>
+              <div class="w-50 mt-3">
+                  <label class="d-block" for="confirmPassword">Xác nhận mật khẩu</label>
+                  <input 
+                      class="d-block w-100 mt-1 <%= validationErrors.find(e => e.param === 'confirmPassword') ? 'invalid' : '' %>"
+                      type="password" 
+                      name="confirmPassword" 
+                      id="confirmPassword" 
+                      value="<%= oldInput.confirmPassword %>">
+              </div>
+              <div class="w-50 mt-3">
+                <label class="d-block" for="password">Tên</label>
+                <input 
+                    class="d-block w-100 mt-1 <%= validationErrors.find(e => e.param === 'name') ? 'invalid' : '' %>"
+                    type="text" 
+                    name="name" 
+                    id="name" 
+                    value="<%= oldInput.name %>">
+            </div>
+
+            <div class="w-50 mt-3">
+                <label class="d-block" for="password">Năm sinh</label>
+                <input 
+                    class="d-block w-100 mt-1 <%= validationErrors.find(e => e.param === 'yearOfBirth') ? 'invalid' : '' %>"
+                    type="text" 
+                    name="yearOfBirth" 
+                    id="yearOfBirth" 
+                    value="<%= oldInput.yearOfBirth %>">
+            </div>
+
+              <button class="btn btn-primary mt-4 w-25" type="submit">Đăng ký</button>
+          </form>
+      </main>
+  </body>
+</html>

@@ -7,7 +7,7 @@
 
 body {
   min-height: 100vh;
-  background-color: #f0f0f0 !important;
+  background-color: #fcfcfc !important;
 }
 
 main {
@@ -19,5 +19,17 @@ h3 {
 }
 
 .btn-primary {
-  background-color: #1976d2 !important;
+  background-color: #08979c !important;
+  border: none !important;
+}
+
+.error-message {
+  color: #ff4d4f;
+}
+
+.account-information {
+  background-color: #ffffff;
+  box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 24px;
 }/*# sourceMappingURL=main.css.map */

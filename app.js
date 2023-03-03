@@ -53,17 +53,24 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) => {
 	res.locals.isAuthenticated = req.session.isLoggedIn;
+	res.locals.isAdmin = req.session.user ? req.session.user.isAdmin : false;
+	res.locals.userId = req.session.user ? req.session.user._id.toString() : '';
 	next();
 });
 
 const nationsRoute = require('./routes/nations.route');
 const playersRoute = require('./routes/players.route');
 const authRoute = require('./routes/auth.route');
+const accountsRoute = require('./routes/accounts.route');
 
 app.use(authRoute);
 
 app.use('/nations', nationsRoute);
 app.use('/players', playersRoute);
+app.use('/accounts', accountsRoute);
+app.use('/not-admin', (req, res, next) => {
+	res.render('not-admin');
+});
 app.use('/', (req, res, next) => {
 	res.redirect('/nations');
 });

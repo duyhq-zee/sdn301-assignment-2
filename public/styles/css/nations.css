@@ -1,6 +1,7 @@
 .nation-list-column {
   background-color: #fff;
-  border-radius: 6px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.1);
 }
 
 a.nation-item {
@@ -17,23 +18,30 @@ a.nation-item:last-child {
   border: none;
 }
 
-.nation-detail-container {
-  background-color: #fff;
-  border-radius: 6px;
+.nation-detail-container .nation-information-box {
+  background-color: #ffffff;
+  box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  border-radius: 10px;
 }
-.nation-detail-container .buttons {
+.nation-detail-container .nation-information-box .buttons {
+  top: 24px;
   right: 24px;
+}
+.nation-detail-container .player-list-box {
+  margin-top: 24px;
 }
 
 a.add-nation-btn {
   border: none;
-  background-color: #1976d2;
-  border-radius: 6px 6px 0 0;
+  background-color: #08979c;
+  border-radius: 10px 10px 0 0;
   color: #fff;
 }
 
 .add-nation-form-container {
-  border-radius: 6px;
-  padding: 1rem;
-  background-color: #fff;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  border-radius: 10px;
 }/*# sourceMappingURL=nations.css.map */

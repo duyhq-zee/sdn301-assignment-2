@@ -3,7 +3,7 @@
 		padding: 0 12%;
 		display: flex;
 		justify-content: space-between;
-		box-shadow: 0px 2px 2px 0px #e0e0e0;
+		box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.1);
 		background-color: #ffffff;
 
 		.logo {
@@ -21,8 +21,9 @@
 
 			h3 {
 				display: inline-block;
+				font-weight: bold;
 				height: 100%;
-				color: #1976d2;
+				color: #08979c;
 			}
 		}
 
@@ -32,58 +33,17 @@
 			padding: 0;
 
 			a.active {
-				border-bottom: 3px solid #1976d2;
+				border-bottom: 3px solid #08979c;
 			}
 
 			a:hover {
-				background-color: #e3f2fd;
+				background-color: #e4f0ee8e;
 			}
 
 			li {
 				display: flex;
 				align-items: center;
 				padding: 16px 16px;
-			}
-		}
-
-		.right-nav {
-			i {
-				width: 100%;
-				font-size: 24px;
-			}
-
-			.user-btn {
-				position: relative;
-
-				.user-nav-menu {
-					display: none !important;
-					z-index: 99;
-					position: absolute;
-					top: 65px;
-					right: 0;
-					display: flex;
-					flex-direction: column;
-
-					background-color: #fff;
-					box-shadow: 0 0 2px 1px #e0e0e0;
-					border-radius: 2px;
-
-					width: 164px;
-
-					li {
-						padding: 8px 16px;
-					}
-
-					li:hover {
-						background-color: #bbdefb;
-					}
-				}
-			}
-
-			.user-btn:hover {
-				.user-nav-menu {
-					display: flex !important;
-				}
 			}
 		}
 
@@ -125,6 +85,76 @@
 				.user-nav-menu {
 					display: flex !important;
 				}
+			}
+		}
+
+		.right-nav {
+			.log-in-btn-container,
+			.sign-up-btn-container {
+				padding: 0;
+
+				a:hover {
+					background: none;
+				}
+			}
+
+			i {
+				width: 100%;
+				font-size: 24px;
+			}
+
+			.user-btn {
+				padding: 10px 12px;
+				height: 100%;
+				position: relative;
+
+				.user-nav-menu {
+					display: none !important;
+					z-index: 99;
+					position: absolute;
+					top: 56px;
+					right: 0;
+					display: flex;
+					flex-direction: column;
+
+					background-color: #fff;
+					box-shadow: 0 0 2px 1px #e0e0e0;
+					border-radius: 2px;
+
+					width: 164px;
+
+					li {
+						padding: 0;
+					}
+
+					li:hover {
+						background-color: #e4f0ee8e;
+					}
+
+					.log-out-btn {
+						display: inline-block;
+						padding: 8px;
+						text-align: left;
+					}
+				}
+			}
+
+			.user-btn:hover {
+				.user-nav-menu {
+					display: flex !important;
+				}
+			}
+
+			.log-in-btn {
+				color: #08979c;
+				margin-right: 16px;
+			}
+
+			.sign-up-btn {
+				color: #08979c;
+				border: #08979c 2px solid;
+				padding: 4px 12px;
+				border-radius: 8px;
 			}
 		}
 

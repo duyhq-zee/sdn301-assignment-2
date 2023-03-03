@@ -13,11 +13,8 @@ router.get('/signup', authController.getSignUp);
 router.post(
 	'/login',
 	[
-		body('email')
-			.isEmail()
-			.withMessage('Please enter a valid email address.')
-			.normalizeEmail(),
-		body('password', 'Password has to be valid.')
+		body('email').isEmail().withMessage('Email không hợp lệ').normalizeEmail(),
+		body('password', 'Mật khẩu không hợp lệ')
 			.isLength({ min: 5 })
 			.isAlphanumeric()
 			.trim(),
@@ -30,24 +27,17 @@ router.post(
 	[
 		check('email')
 			.isEmail()
-			.withMessage('Please enter a valid email.')
-			.custom((value, { req }) => {
-				// if (value === 'test@test.com') {
-				//   throw new Error('This email address if forbidden.');
-				// }
-				// return true;
-				return User.findOne({ email: value }).then((userDoc) => {
-					if (userDoc) {
-						return Promise.reject(
-							'E-Mail exists already, please pick a different one.'
-						);
-					}
-				});
-			})
-			.normalizeEmail(),
+			.withMessage('Email không hợp lệ')
+			.custom(async (value, { req }) => {
+				const userDoc = await User.findOne({ email: value });
+				console.log(userDoc != null);
+				if (userDoc !== null) {
+					return Promise.reject('Email đã tồn tại');
+				}
+			}),
 		body(
 			'password',
-			'Please enter a password with only numbers and text and at least 5 characters.'
+			'Mật khẩu có ít nhất 5 kí tự và không được chứa kí tự đặc biệt'
 		)
 			.isLength({ min: 5 })
 			.isAlphanumeric()
@@ -56,7 +46,7 @@ router.post(
 			.trim()
 			.custom((value, { req }) => {
 				if (value !== req.body.password) {
-					throw new Error('Passwords have to match!');
+					throw new Error('Mật khẩu xác nhận không trùng khớp');
 				}
 				return true;
 			}),

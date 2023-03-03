@@ -1,0 +1,24 @@
+<%- include('../partials/head.ejs') %>
+  <link rel="stylesheet" href="/styles/css/auth.css">
+  </head>
+
+  <body>
+    <%- include('../partials/navbar.ejs') %>
+      <main>
+        <form class="login-form mt-4 d-flex flex-column align-items-center" action="/login" method="POST">
+          <% if (errorMessage) { %>
+            <div class="error-message mb-3"><%= errorMessage %></div>
+          <% } %>
+          <div class="w-50">
+            <label class="d-block" for="email">Email</label>
+            <input  class="d-block mt-1 w-100" type="email" name="email" id="email">
+          </div>
+          <div class="w-50 mt-3">
+            <label class="d-block" for="password">Mật khẩu</label>
+            <input class="d-block mt-1 w-100" type="password" name="password" id="password">
+          </div>
+          <button class="btn btn-primary mt-4 w-25" type="submit">Đăng nhập</button>
+        </form>
+      </main>
+  </body>
+</html>
