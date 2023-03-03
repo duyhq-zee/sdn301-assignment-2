@@ -1,23 +1,30 @@
 const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
+const jwt = require('jsonwebtoken');
 
 const User = require('../models/user.model');
 
 exports.getAccounts = (req, res, next) => {};
 
 exports.getAccountById = (req, res, next) => {
+	const accessToken = req.session.accessToken;
+	var decoded = jwt.verify(accessToken, 'My secret');
+
 	res.render('accounts/my-account-page', {
 		path: '/accounts',
 		pageTitle: 'Tài khoản',
-		user: req.session.user,
+		user: decoded.user,
 	});
 };
 
 exports.getEditAccount = (req, res, next) => {
+	const accessToken = req.session.accessToken;
+	var decoded = jwt.verify(accessToken, 'My secret');
+
 	res.render('accounts/edit-account-page', {
 		path: '/accounts/edit-account',
 		pageTitle: 'Chỉnh sửa tài khoản',
-		user: req.session.user,
+		user: decoded.user,
 	});
 };
 
@@ -71,7 +78,11 @@ exports.postEditAccount = (req, res, next) => {
 				return user.save();
 			})
 			.then((result) => {
-				req.session.user = user;
+				const accessToken = jwt.sign(
+					{ user: { ...user._doc, password: null } },
+					'My secret'
+				);
+				req.session.accessToken = accessToken;
 				res.redirect(`/accounts/${user._id}`);
 			})
 			.catch((err) => {

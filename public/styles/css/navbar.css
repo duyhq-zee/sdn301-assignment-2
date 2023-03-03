@@ -101,6 +101,10 @@
 .main-header .navbar .right-nav .user-btn .user-nav-menu li {
   padding: 0;
 }
+.main-header .navbar .right-nav .user-btn .user-nav-menu li a {
+  display: inline-block;
+  padding: 8px;
+}
 .main-header .navbar .right-nav .user-btn .user-nav-menu li:hover {
   background-color: rgba(228, 240, 238, 0.5568627451);
 }

@@ -11,6 +11,8 @@ const User = require('./models/user.model');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
+const jwt = require('jsonwebtoken');
+
 var app = express();
 
 // view engine setup
@@ -40,10 +42,15 @@ app.use(
 app.use(flash());
 
 app.use((req, res, next) => {
-	if (!req.session.user) {
+	const accessToken = req.session.accessToken;
+
+	if (!accessToken) {
 		return next();
 	}
-	User.findById(req.session.user._id)
+
+	var decoded = jwt.verify(accessToken, 'My secret');
+
+	User.findById(decoded.user._id)
 		.then((user) => {
 			req.user = user;
 			next();
@@ -52,9 +59,13 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-	res.locals.isAuthenticated = req.session.isLoggedIn;
-	res.locals.isAdmin = req.session.user ? req.session.user.isAdmin : false;
-	res.locals.userId = req.session.user ? req.session.user._id.toString() : '';
+	const accessToken = req.session.accessToken;
+	var decoded = accessToken ? jwt.verify(accessToken, 'My secret') : null;
+
+	res.locals.isAuthenticated = accessToken != null;
+	res.locals.isAdmin = accessToken ? decoded.user.isAdmin : false;
+	res.locals.userId = accessToken ? decoded.user._id.toString() : '';
+
 	next();
 });
 

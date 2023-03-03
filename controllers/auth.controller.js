@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
 const User = require('../models/user.model');
+var jwt = require('jsonwebtoken');
 
 exports.getLogIn = (req, res, next) => {
 	let message = req.flash('error');
@@ -80,8 +81,11 @@ exports.postLogIn = (req, res, next) => {
 				.compare(password, user.password)
 				.then((doMatch) => {
 					if (doMatch) {
-						req.session.isLoggedIn = true;
-						req.session.user = user;
+						const accessToken = jwt.sign(
+							{ user: { ...user._doc, password: null } },
+							'My secret'
+						);
+						req.session.accessToken = accessToken;
 						return req.session.save((err) => {
 							res.redirect('/');
 						});
