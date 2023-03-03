@@ -1,0 +1,30 @@
+<%- include('../partials/head.ejs') %>
+		<link rel="stylesheet" href="/styles/css/nations.css">
+		<link rel="stylesheet" href="/styles/css/players.css">
+	</head>
+
+	<body>
+		<%- include('../partials/navbar.ejs') %>
+
+      <main>
+        <div class="container-fluid mt-4">
+          <div class="account-information row">
+            <div>
+              <h4 class="d-inline-block me-4">Thông tin cá nhân</h4>
+              <a  class="d-inline-block btn btn-warning" href="/accounts/edit-account/<%= user._id %>" >Chỉnh sửa</a>
+            </div>
+
+            <p class="m-0 mt-4">Email:</p>
+            <p class="m-0"><%= user.email %></p>
+
+            <p class="m-0 mt-3">Tên:</p>
+            <p class="m-0"><%= user.name %></p>
+
+            <p class="m-0 mt-3">Năm sinh:</p>
+            <p class="m-0"><%= user.yearOfBirth %></p>
+
+          </div>
+        </div>
+      </main>
+	</body>
+</html>
