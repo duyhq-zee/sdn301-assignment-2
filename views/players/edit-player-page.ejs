@@ -15,22 +15,22 @@
             </div>
             <div class="col-7 container-fluid content">
               <form action="/players/edit-player/<%= player.id %>" method="POST" class="d-flex flex-column align-items-end">
-                <div class="player-property row w-100">
-                  <h3 class="m-0 col-4">Tên</h3>
+                <div class="player-property row align-items-center w-100">
+                  <h6 class="m-0 col-4">Tên</h6>
                   <input type="text" class="col-7" name="name" value="<%= player.name %>" required/>
-                  <input type="checkbox" name="isCaptain" id="" class="col-1" <%= player.isCaptain ? 'checked' : '' %> value='true' data-bs-toggle="tooltip" data-bs-placement="top" title="Is this player captain?">
+                  <input type="checkbox" name="isCaptain" id="" class="col-1" <%= player.isCaptain ? 'checked' : '' %> value='true' data-bs-toggle="tooltip" data-bs-placement="top" title="Cầu thủ này là đội trưởng?">
                 </div>
                 
-                <div class="player-property row w-100">
-                  <h3 class="m-0 col-4">Câu lạc bộ</h3>
+                <div class="player-property row align-items-center w-100">
+                  <h6 class="m-0 col-4">Câu lạc bộ</h6>
                   <input type="text" class="col-8"name="club" value="<%= player.club %>" />
                 </div>
-                <div class="player-property row w-100">
-                  <h3 class="col-4">URL hình ảnh</h3>
+                <div class="player-property row align-items-center w-100">
+                  <h6 class="col-4">URL hình ảnh</h6>
                   <input type="text" class="col-8" name="imageUrl" value="<%= player.imageUrl %>" />
                 </div>
-                <div class="player-property row w-100">
-                  <h3 class="m-0 col-4">Quốc tịch</h3>
+                <div class="player-property row align-items-center w-100">
+                  <h6 class="m-0 col-4">Quốc tịch</h6>
                   <!-- <input type="text" class="col-8" name="nation" value="<%= player.nation %>" required/> -->
                   <div class="col-8 p-0">
                     <select class="w-100 h-100" name="nation" id="">
@@ -41,11 +41,28 @@
                     </select>
                   </div>
                 </div>
-                <div class="row player-property w-100">
-                    <h3 class="m-0 col-2">Vị trí</h3>
-                    <input type="text" class="col-3 d-inline-block" name="position" value="<%= player.position %>" />
-                    <div class="col-1"></div>
-                    <h3 class="m-0 col-4">Số bàn thắng</h3>
+                <div class="row align-items-center player-property w-100">
+                    <h6 class="m-0 col-2">Vị trí</h6>
+                    <div class="col-5 p-0">
+                      <select class="w-100 h-100" name="position" id="position">
+                        <option value="Thủ môn">Thủ môn</option>
+                        <option value="Trung vệ">Trung vệ</option>
+                        <option value="Hậu vệ quét">Hậu vệ quét</option>
+                        <option value="Hậu vệ cánh">Hậu vệ cánh</option>
+                        <option value="Hậu vệ cánh tấn công">Hậu vệ cánh tấn công</option>
+                        <option value="Tiền vệ">Tiền vệ</option>
+                        <option value="Tiền vệ phòng ngự">Tiền vệ phòng ngự</option>
+                        <option value="Tiền vệ trung tâm">Tiền vệ trung tâm</option>
+                        <option value="Tiền vệ chạy cánh">Tiền vệ chạy cánh</option>
+                        <option value="Tiền vệ tấn công">Tiền vệ tấn công</option>
+                        <option value="Tiền đạo cắm">Tiền đạo cắm</option>
+                        <option value="Tiền đạo trung tâm">Tiền đạo trung tâm</option>
+                        <option value="Hộ công">Hộ công</option>
+                        <option value="Tiền đạo cánh">Tiền đạo cánh</option>
+                      </select>
+                    </div>
+
+                    <h6 class="m-0 col-3 ps-3">Số bàn thắng</h6>
                     <input type="text" class="col-2" name="goals" value="<%= player.goals %>" />
                 </div>
 

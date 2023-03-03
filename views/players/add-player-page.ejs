@@ -14,12 +14,19 @@
                 <div class="player-property row w-100">
                   <h3 class="col-4">Tên</h3>
                   <input type="text" class="col-7" name="name" required/>
-                  <input type="checkbox" name="isCaptain" id="" class="col-1" value="true" data-bs-toggle="tooltip" data-bs-placement="top" title="Is this player captain?">
+                  <input type="checkbox" name="isCaptain" id="" class="col-1" value="true" data-bs-toggle="tooltip" data-bs-placement="top" title="Cầu thủ này là đội trưởng?">
                 </div>
                 
                 <div class="player-property row w-100">
                   <h3 class="col-4">Câu lạc bộ</h3>
-                  <input type="text" class="col-8" name="club"  />
+                  <!-- <input type="text" class="col-8" name="club"  /> -->
+                  <div class="col-8 p-0">
+                    <select class="w-100 h-100" name="club" id="club">
+                      <option value="Manchester City">Manchester City</option>
+                      <option value="Manchester United">Manchester United</option>
+                      <option value="Liverpool">Liverpool</option>
+                    </select>
+                  </div>
                 </div>
                 <div class="player-property row w-100">
                   <h3 class="col-4">Quốc tịch</h3>
@@ -35,7 +42,25 @@
                 </div>
                 <div class="player-property row w-100">
                   <h3 class="col-4">Vị trí</h3>
-                  <input type="text" class="col-8" name="position" />
+                  <!-- <input type="text" class="col-8" name="position" /> -->
+                  <div class="col-8 p-0">
+                    <select class="w-100 h-100" name="position" id="position">
+                      <option value="Thủ môn">Thủ môn</option>
+                      <option value="Trung vệ">Trung vệ</option>
+                      <option value="Hậu vệ quét">Hậu vệ quét</option>
+                      <option value="Hậu vệ cánh">Hậu vệ cánh</option>
+                      <option value="Hậu vệ cánh tấn công">Hậu vệ cánh tấn công</option>
+                      <option value="Tiền vệ">Tiền vệ</option>
+                      <option value="Tiền vệ phòng ngự">Tiền vệ phòng ngự</option>
+                      <option value="Tiền vệ trung tâm">Tiền vệ trung tâm</option>
+                      <option value="Tiền vệ chạy cánh">Tiền vệ chạy cánh</option>
+                      <option value="Tiền vệ tấn công">Tiền vệ tấn công</option>
+                      <option value="Tiền đạo cắm">Tiền đạo cắm</option>
+                      <option value="Tiền đạo trung tâm">Tiền đạo trung tâm</option>
+                      <option value="Hộ công">Hộ công</option>
+                      <option value="Tiền đạo cánh">Tiền đạo cánh</option>
+                    </select>
+                  </div>
                 </div>
                 <div class="player-property row w-100">
                   <h3 class="col-4">Số bàn thắng</h3>

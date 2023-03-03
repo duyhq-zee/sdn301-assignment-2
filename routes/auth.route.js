@@ -13,11 +13,10 @@ router.get('/signup', authController.getSignUp);
 router.post(
 	'/login',
 	[
-		body('email').isEmail().withMessage('Email không hợp lệ').normalizeEmail(),
+		body('email').isEmail().withMessage('Email không hợp lệ'),
 		body('password', 'Mật khẩu không hợp lệ')
 			.isLength({ min: 5 })
-			.isAlphanumeric()
-			.trim(),
+			.isAlphanumeric(),
 	],
 	authController.postLogIn
 );
@@ -40,16 +39,14 @@ router.post(
 			'Mật khẩu có ít nhất 5 kí tự và không được chứa kí tự đặc biệt'
 		)
 			.isLength({ min: 5 })
-			.isAlphanumeric()
-			.trim(),
-		body('confirmPassword')
-			.trim()
-			.custom((value, { req }) => {
-				if (value !== req.body.password) {
-					throw new Error('Mật khẩu xác nhận không trùng khớp');
-				}
-				return true;
-			}),
+			.isAlphanumeric(),
+
+		body('confirmPassword').custom((value, { req }) => {
+			if (value !== req.body.password) {
+				throw new Error('Mật khẩu xác nhận không trùng khớp');
+			}
+			return true;
+		}),
 	],
 	authController.postSignUp
 );

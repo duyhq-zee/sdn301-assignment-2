@@ -61,6 +61,8 @@ exports.postLogIn = (req, res, next) => {
 		});
 	}
 
+	console.log(email);
+
 	User.findOne({ email: email })
 		.then((user) => {
 			if (!user) {
@@ -80,6 +82,7 @@ exports.postLogIn = (req, res, next) => {
 			bcrypt
 				.compare(password, user.password)
 				.then((doMatch) => {
+					console.log(doMatch);
 					if (doMatch) {
 						const accessToken = jwt.sign(
 							{ user: { ...user._doc, password: null } },

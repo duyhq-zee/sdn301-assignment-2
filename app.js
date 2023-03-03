@@ -80,7 +80,10 @@ app.use('/nations', nationsRoute);
 app.use('/players', playersRoute);
 app.use('/accounts', accountsRoute);
 app.use('/not-admin', (req, res, next) => {
-	res.render('not-admin');
+	res.render('not-admin', {
+		path: '/not-admin',
+		pageTitle: 'Không phải quản trị viên',
+	});
 });
 app.use('/', (req, res, next) => {
 	res.redirect('/nations');

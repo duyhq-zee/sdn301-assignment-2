@@ -4,13 +4,16 @@ const playerSchema = mongoose.Schema({
 	name: {
 		type: String,
 		required: true,
+		default: ' ',
 	},
 	imageUrl: {
 		type: String,
+		default: ' ',
 	},
 	club: {
 		type: String,
 		required: true,
+		default: ' ',
 	},
 	position: {
 		type: String,
@@ -21,6 +24,7 @@ const playerSchema = mongoose.Schema({
 	isCaptain: {
 		type: Boolean,
 		required: true,
+		default: false,
 	},
 	nation: {
 		type: String,

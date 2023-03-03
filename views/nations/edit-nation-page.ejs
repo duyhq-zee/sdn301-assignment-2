@@ -12,10 +12,10 @@
             <h3 class="mb-4">Chỉnh sửa <%= nation.name %></h3>
             <form action="/nations/edit-nation/<%= nation.id %>" method="POST"
               class="w-100 d-flex align-items-end flex-column">
-              <input type="text" id="name" name="name" class="form-control mb-2" placeholder="Tên" value="<%= nation.name %>">
+              <input type="text" id="name" name="name" class="form-control mb-2" placeholder="Tên" value="<%= nation.name %>" required>
         
               <input type="text" id="description" name="description" class="form-control mb-2" placeholder="Mô tả"
-                value="<%= nation.description %>">
+                value="<%= nation.description %>" required>
         
               <button type="submit" class="btn btn-sm btn-primary mt-2">Lưu</button>
             </form>

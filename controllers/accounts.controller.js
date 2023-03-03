@@ -21,19 +21,28 @@ exports.getEditAccount = (req, res, next) => {
 	const accessToken = req.session.accessToken;
 	var decoded = jwt.verify(accessToken, 'My secret');
 
+	let message = req.flash('error');
+	if (message.length > 0) {
+		message = message[0];
+	} else {
+		message = null;
+	}
+
 	res.render('accounts/edit-account-page', {
 		path: '/accounts/edit-account',
 		pageTitle: 'Chỉnh sửa tài khoản',
 		user: decoded.user,
+		errorMessage: message,
 	});
 };
 
 exports.postEditAccount = (req, res, next) => {
 	const { email, password, name, yearOfBirth } = req.body;
 
-	User.findOne({ email: email }).then((user) => {
+	User.findById(req.params.accountId).then((user) => {
 		const errors = validationResult(req);
-		console.log(errors);
+		// console.log(errors);
+		console.log(user);
 
 		if (!errors.isEmpty()) {
 			console.log(errors.array());
@@ -41,6 +50,7 @@ exports.postEditAccount = (req, res, next) => {
 				path: '/accounts/edit-account',
 				pageTitle: 'Chỉnh sửa tài khoản',
 				errorMessage: errors.array()[0].msg,
+				user: user,
 				oldInput: {
 					email: email,
 					password: password,
