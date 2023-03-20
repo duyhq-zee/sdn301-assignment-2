@@ -4,15 +4,28 @@ const Nation = require('../models/nation.model');
 exports.getPlayers = (req, res, next) => {
 	Nation.find()
 		.then((nations) => {
-			Player.find().then((players) => {
-				res.render('players/player-list-page', {
-					path: '/players',
-					pageTitle: 'Danh sách cầu thủ',
+			let perPage = 4;
+			let page = req.params.page || 1;
 
-					players: players,
-					nations: nations,
+			Player.find()
+				.skip(perPage * page - perPage)
+				.limit(perPage)
+				.exec((err, players) => {
+					Player.countDocuments((err, count) => {
+						console.log(Math.ceil(count / perPage));
+
+						if (err) return next(err);
+						res.render('players/player-list-page', {
+							path: '/players',
+							pageTitle: 'Danh sách cầu thủ',
+
+							players: players,
+							nations: nations,
+							currentPage: page,
+							pagesNumber: Math.ceil(count / perPage),
+						});
+					});
 				});
-			});
 		})
 		.catch((err) => {
 			console.log(err);

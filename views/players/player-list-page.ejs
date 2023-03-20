@@ -36,6 +36,35 @@
 			<div class="mt-4" id="player-list-container">
 				<%- include('../partials/players/player-list.ejs', {players: players}) %>
 			</div>
+
+			<div class="paginator">
+
+				<% if (+currentPage >= 2) { %>
+					<a href="/players/page/<%= +currentPage - 1%>" class="d-inline-block">Trang trước</a>
+				<% } %>
+
+				<% if (+currentPage >= 3) { %>
+					<a href="/players/page/<%= +currentPage - 2%>" class="d-inline-block"><%= +currentPage - 2%></a>
+				<% } %>
+
+				<% if (+currentPage >= 2) { %>
+					<a href="/players/page/<%= +currentPage - 1%>" class="d-inline-block"><%= +currentPage - 1%></a>
+				<% } %>
+
+				<p class="d-inline-block"><%= +currentPage %></p>
+
+				<% if (+currentPage <= pagesNumber - 1) { %>
+					<a href="/players/page/<%= +currentPage + 1%>" class="d-inline-block"><%= +currentPage + 1%></a>
+				<% } %>
+
+				<% if (+currentPage <= pagesNumber - 2) { %>
+					<a href="/players/page/<%= +currentPage + 2%>" class="d-inline-block"><%= +currentPage + 2%></a>
+				<% } %>
+
+				<% if (+currentPage <= pagesNumber - 1) { %>
+					<a href="/players/page/<%= +currentPage + 1%>" class="d-inline-block">Trang kế</a>
+				<% } %>
+			</div>
 		</main>
 
 		<script>
