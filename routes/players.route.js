@@ -13,6 +13,8 @@ const playerController = require('../controllers/players.controller');
 
 router.get('/', playerController.getPlayers);
 
+router.post('/search', playerController.searchPlayers);
+
 router.get('/add-player', isAuth, isAdmin, playerController.getAddPlayer);
 
 router.post('/add-player', isAuth, isAdmin, playerController.postAddPlayer);

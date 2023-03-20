@@ -12,6 +12,15 @@ exports.getPlayers = (req, res, next) => {
 	});
 };
 
+exports.searchPlayers = async (req, res, next) => {
+	const { searchInput } = req.body;
+	console.log(searchInput);
+
+	const players = await Player.find({ name: { $regex: searchInput } });
+
+	res.send(players);
+};
+
 exports.getAddPlayer = (req, res, next) => {
 	Nation.find()
 		.then((nations) => {

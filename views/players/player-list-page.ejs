@@ -5,14 +5,64 @@
 	<body>
 		<%- include('../partials/navbar.ejs') %>
 
-			<main>
-				<h3 class="mt-4">Danh sách cầu thủ</h3>
-				<% if (isAdmin) { %>
-					<a href="/players/add-player" class="btn btn-primary mt-2">+ Thêm cầu thủ</a>
-				<% } %>
-				<div class="mt-4">
-					<%- include('../partials/players/player-list.ejs', {players: players}) %>
-				</div>
-			</main>
+		<main>
+			<h3 class="mt-4">Danh sách cầu thủ</h3>
+			<form>
+				<input type="text" id="search-input" name="search-input">
+				<button type="button" id="search-button">Search</button>
+			</form>
+
+			<% if (isAdmin) { %>
+				<a href="/players/add-player" class="btn btn-primary mt-2">+ Thêm cầu thủ</a>
+			<% } %>
+			<div class="mt-4" id="player-list-container">
+				<%- include('../partials/players/player-list.ejs', {players: players}) %>
+			</div>
+		</main>
+
+		<script>
+			$(document).ready(function () {
+				const searchInput = document
+
+				$('#search-input').keyup(function (e) {
+					e.preventDefault();
+
+					var searchInput = $('#search-input').val();
+					$.ajax({
+						url: '/players/search',
+						type: 'POST',
+						data: { searchInput: searchInput },
+						success: function (data) {
+							let htmlString = `<div class="player-list">`;
+
+							data.forEach(player => {
+								htmlString +=
+								`
+									<div class="player-item p-3">
+										<div class="image-container">
+											<a href="/players/${player.id}">
+												<img src="${player.imageUrl}" alt="">
+											</a>
+										</div>
+										<div class="content pt-3">
+											<div class="">
+												<h3 class="m-0 mb-1">${player.name}</h3>
+												<p class="m-0">${player.club}</p>
+											</div>
+										</div>
+									</div>
+
+								`
+							});
+
+							htmlString += `</div>`
+
+							$('#player-list-container').html(htmlString);
+						}
+					});
+				});
+			});
+		</script>
+			
 	</body>
 </html>
