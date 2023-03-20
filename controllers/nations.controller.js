@@ -108,7 +108,6 @@ exports.postRemoveNation = (req, res, next) => {
 	Nation.findById(req.params.nationId)
 		.remove()
 		.then((doc) => {
-			console.log(doc);
 			res.redirect('/nations');
 		});
 };

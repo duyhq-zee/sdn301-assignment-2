@@ -1,8 +1,8 @@
 const express = require('express');
-const { check, body } = require('express-validator');
 const User = require('../models/user.model');
 
 const authController = require('../controllers/auth.controller');
+const authValidation = require('../validations/auth.validation');
 
 const router = express.Router();
 
@@ -10,46 +10,9 @@ router.get('/login', authController.getLogIn);
 
 router.get('/signup', authController.getSignUp);
 
-router.post(
-	'/login',
-	[
-		body('email').isEmail().withMessage('Email không hợp lệ'),
-		body('password', 'Mật khẩu không hợp lệ')
-			.isLength({ min: 5 })
-			.isAlphanumeric(),
-	],
-	authController.postLogIn
-);
+router.post('/login', authValidation.logIn, authController.postLogIn);
 
-router.post(
-	'/signup',
-	[
-		check('email')
-			.isEmail()
-			.withMessage('Email không hợp lệ')
-			.custom(async (value, { req }) => {
-				const userDoc = await User.findOne({ email: value });
-				console.log(userDoc != null);
-				if (userDoc !== null) {
-					return Promise.reject('Email đã tồn tại');
-				}
-			}),
-		body(
-			'password',
-			'Mật khẩu có ít nhất 5 kí tự và không được chứa kí tự đặc biệt'
-		)
-			.isLength({ min: 5 })
-			.isAlphanumeric(),
-
-		body('confirmPassword').custom((value, { req }) => {
-			if (value !== req.body.password) {
-				throw new Error('Mật khẩu xác nhận không trùng khớp');
-			}
-			return true;
-		}),
-	],
-	authController.postSignUp
-);
+router.post('/signup', authValidation.signUp, authController.postSignUp);
 
 router.post('/logout', authController.postLogOut);
 

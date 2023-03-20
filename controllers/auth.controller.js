@@ -61,8 +61,6 @@ exports.postLogIn = (req, res, next) => {
 		});
 	}
 
-	console.log(email);
-
 	User.findOne({ email: email })
 		.then((user) => {
 			if (!user) {
@@ -82,7 +80,6 @@ exports.postLogIn = (req, res, next) => {
 			bcrypt
 				.compare(password, user.password)
 				.then((doMatch) => {
-					console.log(doMatch);
 					if (doMatch) {
 						const accessToken = jwt.sign(
 							{ user: { ...user._doc, password: null } },
@@ -116,10 +113,8 @@ exports.postSignUp = (req, res, next) => {
 	const { email, password, name, yearOfBirth } = req.body;
 
 	const errors = validationResult(req);
-	console.log(errors);
 
 	if (!errors.isEmpty()) {
-		console.log(errors.array());
 		return res.status(422).render('auth/sign-up-page', {
 			path: '/signup',
 			pageTitle: 'Signup',

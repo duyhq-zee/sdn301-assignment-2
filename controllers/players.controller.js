@@ -12,8 +12,6 @@ exports.getPlayers = (req, res, next) => {
 				.limit(perPage)
 				.exec((err, players) => {
 					Player.countDocuments((err, count) => {
-						console.log(Math.ceil(count / perPage));
-
 						if (err) return next(err);
 						res.render('players/player-list-page', {
 							path: '/players',
@@ -47,8 +45,6 @@ exports.searchPlayers = async (req, res, next) => {
 	if (nationFilter != 'All') {
 		players = players.filter((p) => p.nation == nationFilter);
 	}
-
-	console.log(players);
 
 	res.send(players);
 };
@@ -86,7 +82,6 @@ exports.postAddPlayer = (req, res, next) => {
 
 exports.getPlayerById = (req, res, next) => {
 	Player.findById(req.params.playerId).then((player) => {
-		console.log(player);
 		res.render('players/player-detail-page', {
 			path: `/players/${req.params.playerId}`,
 			pageTitle: player.name,
