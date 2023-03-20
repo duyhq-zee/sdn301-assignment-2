@@ -2,21 +2,40 @@ const Player = require('../models/player.model');
 const Nation = require('../models/nation.model');
 
 exports.getPlayers = (req, res, next) => {
-	Player.find().then((players) => {
-		res.render('players/player-list-page', {
-			path: '/players',
-			pageTitle: 'Danh sách cầu thủ',
+	Nation.find()
+		.then((nations) => {
+			Player.find().then((players) => {
+				res.render('players/player-list-page', {
+					path: '/players',
+					pageTitle: 'Danh sách cầu thủ',
 
-			players: players,
+					players: players,
+					nations: nations,
+				});
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+			res.end('Error');
 		});
-	});
 };
 
 exports.searchPlayers = async (req, res, next) => {
-	const { searchInput } = req.body;
-	console.log(searchInput);
+	const { searchInput, clubFilter, nationFilter } = req.body;
 
-	const players = await Player.find({ name: { $regex: searchInput } });
+	let players = await Player.find({
+		name: { $regex: searchInput },
+	});
+
+	if (clubFilter != 'All') {
+		players = players.filter((p) => p.club == clubFilter);
+	}
+
+	if (nationFilter != 'All') {
+		players = players.filter((p) => p.nation == nationFilter);
+	}
+
+	console.log(players);
 
 	res.send(players);
 };

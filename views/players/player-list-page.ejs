@@ -5,12 +5,30 @@
 	<body>
 		<%- include('../partials/navbar.ejs') %>
 
+
+
 		<main>
 			<h3 class="mt-4">Danh sách cầu thủ</h3>
 			<form>
 				<input type="text" id="search-input" name="search-input">
 				<button type="button" id="search-button">Search</button>
 			</form>
+
+			<div class="filters">
+				<select name="club-filter" id="club-filter">
+					<option value="All">Tất cả CLB</option>
+					<option value="Manchester United">Manchester United</option>
+					<option value="Manchester City">Manchester City</option>
+					<option value="Liverpool">Liverpool</option>
+				</select>
+
+				<select name="nation-filter" id="nation-filter">
+					<option value="All">Tất cả quốc tịch</option>
+					<% nations.forEach((nation) => { %>
+						<option value="<%= nation.name %>"><%= nation.name %>	</option>
+					<% }) %>
+				</select>
+			</div>
 
 			<% if (isAdmin) { %>
 				<a href="/players/add-player" class="btn btn-primary mt-2">+ Thêm cầu thủ</a>
@@ -21,45 +39,65 @@
 		</main>
 
 		<script>
-			$(document).ready(function () {
-				const searchInput = document
+			const searchFunction = (data) => {
+				let htmlString = `<div class="player-list">`;
 
-				$('#search-input').keyup(function (e) {
-					e.preventDefault();
+				data.forEach(player => {
+					htmlString +=
+						`
+							<div class="player-item p-3">
+								<div class="image-container">
+									<a href="/players/${player._id}">
+										<img src="${player.imageUrl}" alt="">
+									</a>
+								</div>
+								<div class="content pt-3">
+									<div class="">
+										<h3 class="m-0 mb-1">${player.name}</h3>
+										<p class="m-0">${player.club}</p>
+									</div>
+								</div>
+							</div>
+	
+						`
+				});
 
-					var searchInput = $('#search-input').val();
+				htmlString += `</div>`
+
+				$('#player-list-container').html(htmlString);
+			};
+
+			const onChange = (e) => {
+				e.preventDefault();
+
+					let searchInput = '';
+					let clubFilter = 'All';
+
+					searchInput = $('#search-input').val();
+					clubFilter = $('#club-filter').find(":selected").val();
+					nationFilter = $('#nation-filter').find(":selected").val();
+
 					$.ajax({
 						url: '/players/search',
 						type: 'POST',
-						data: { searchInput: searchInput },
-						success: function (data) {
-							let htmlString = `<div class="player-list">`;
-
-							data.forEach(player => {
-								htmlString +=
-								`
-									<div class="player-item p-3">
-										<div class="image-container">
-											<a href="/players/${player.id}">
-												<img src="${player.imageUrl}" alt="">
-											</a>
-										</div>
-										<div class="content pt-3">
-											<div class="">
-												<h3 class="m-0 mb-1">${player.name}</h3>
-												<p class="m-0">${player.club}</p>
-											</div>
-										</div>
-									</div>
-
-								`
-							});
-
-							htmlString += `</div>`
-
-							$('#player-list-container').html(htmlString);
-						}
+						data: { searchInput: searchInput, clubFilter: clubFilter, nationFilter: nationFilter },
+						success: searchFunction,
 					});
+			}
+
+			$(document).ready(function () {
+				searchInput = document
+
+				$('#search-input').keyup(function (e) {
+					onChange(e);
+				});
+
+				$('#club-filter').change(function (e) {
+					onChange(e);
+				});
+
+				$('#nation-filter').change(function (e) {
+					onChange(e);
 				});
 			});
 		</script>
