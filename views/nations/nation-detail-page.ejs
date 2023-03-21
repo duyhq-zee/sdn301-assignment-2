@@ -23,7 +23,7 @@
                   <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Xóa
                   </button>
-                  <a href="/nations/edit-nation/<%= nation.id %>" class="btn btn-warning">Chỉnh sửa</a>
+                  <a href="/nations/edit-nation/<%= nation._id %>" class="btn btn-warning">Chỉnh sửa</a>
                 </div>
               </div>
 
@@ -51,8 +51,8 @@
               <p>Xác nhận xóa quốc gia <%= nation.name %>?</p>
             </div>
             <div class="modal-footer">
-              <form action="/nations/remove-nation/<%= nation.id %>" method="POST" class="d-inline-block">
-                <input type="hidden" name="id" value="<%= nation.id %>">
+              <form action="/nations/remove-nation/<%= nation._id %>" method="POST" class="d-inline-block">
+                <input type="hidden" name="id" value="<%= nation._id %>">
                 <button class="btn btn-danger">Xóa</button>
               </form>
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>

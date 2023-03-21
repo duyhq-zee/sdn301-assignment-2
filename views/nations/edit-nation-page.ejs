@@ -10,7 +10,7 @@
           <%- include('../partials/nations/nation-list.ejs') %>
           <div class="col-8 position-relative add-nation-form-container">
             <h3 class="mb-4">Chỉnh sửa <%= nation.name %></h3>
-            <form action="/nations/edit-nation/<%= nation.id %>" method="POST"
+            <form action="/nations/edit-nation/<%= nation._id %>" method="POST"
               class="w-100 d-flex align-items-end flex-column">
               <input type="text" id="name" name="name" class="form-control mb-2" placeholder="Tên" value="<%= nation.name %>" required>
         

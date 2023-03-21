@@ -8,7 +8,7 @@
     <div class="nation-list">
       <% if (nations.length> 0) { %>
         <% nations.forEach(nation=> { %>
-          <a href="/nations/<%= nation.id %>" class="nation-item p-3 d-block <%= path.includes(nation.id) ? 'active' : ''%>">
+          <a href="/nations/<%= nation._id %>" class="nation-item p-3 d-block <%= path.includes(nation._id) ? 'active' : ''%>">
             <div>
               <h3 class="m-0">
                 <%= nation.name %>

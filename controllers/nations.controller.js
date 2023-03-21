@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const Nation = require('../models/nation.model');
 const Player = require('../models/player.model');
 
@@ -18,12 +20,15 @@ exports.getNations = (req, res, next) => {
 };
 
 exports.getNationById = (req, res, next) => {
+	if (!mongoose.Types.ObjectId.isValid(req.params.nationId)) {
+		return res.redirect('/nations');
+	}
 	Nation.find()
 		.then((nations) => {
 			Nation.findById(req.params.nationId).then((nation) => {
 				Player.find({ nation: nation.name }).then((players) => {
 					res.render('nations/nation-detail-page', {
-						path: `/nations/${nation.id}`,
+						path: `/nations/${nation._id}`,
 						pageTitle: nation.name,
 
 						nations: nations,
@@ -65,16 +70,12 @@ exports.postAddNation = (req, res, next) => {
 	});
 };
 
-// exports.deleteRemoveAllNations = (req, res, next) => {
-// 	res.redirect('/nations');
-// };
-
 exports.getEditNation = (req, res, next) => {
 	Nation.find()
 		.then((nations) => {
 			Nation.findById(req.params.nationId).then((nation) => {
 				res.render('nations/edit-nation-page', {
-					path: `/nations/edit-nation/${nation.id}`,
+					path: `/nations/edit-nation/${nation._id}`,
 					pageTitle: nation.name,
 
 					nations: nations,
@@ -96,7 +97,7 @@ exports.postEditNation = (req, res, next) => {
 
 			nation.save().then((doc) => {
 				console.log(doc);
-				res.redirect(`/nations/${nation.id}`);
+				res.redirect(`/nations/${nation._id}`);
 			});
 		})
 		.catch((err) => {

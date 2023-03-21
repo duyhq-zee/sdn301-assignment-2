@@ -121,7 +121,7 @@ exports.postEditPlayer = (req, res, next) => {
 
 		player.save();
 
-		res.redirect(`/players/${player.id}`);
+		res.redirect(`/players/${player._id}`);
 	});
 };
 

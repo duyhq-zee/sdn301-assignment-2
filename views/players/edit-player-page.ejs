@@ -14,7 +14,7 @@
               </div>
             </div>
             <div class="col-7 container-fluid content">
-              <form action="/players/edit-player/<%= player.id %>" method="POST" class="d-flex flex-column align-items-end">
+              <form action="/players/edit-player/<%= player._id %>" method="POST" class="d-flex flex-column align-items-end">
                 <div class="player-property row align-items-center w-100">
                   <h6 class="m-0 col-4">Tên</h6>
                   <input type="text" class="col-7" name="name" value="<%= player.name %>" required/>
