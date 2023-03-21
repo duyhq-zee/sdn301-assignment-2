@@ -11,11 +11,9 @@ const playerController = require('../controllers/players.controller');
 // 	next();
 // });
 
-router.get('/', (req, res, next) => {
-	res.redirect('/players/page/1');
-});
+router.get('/', playerController.getPlayers);
 
-router.get('/page/:page', playerController.getPlayers);
+// router.get('/page/:page', playerController.getPlayers);
 
 router.post('/search', playerController.searchPlayers);
 

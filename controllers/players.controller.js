@@ -7,23 +7,20 @@ exports.getPlayers = (req, res, next) => {
 			let perPage = 4;
 			let page = req.params.page || 1;
 
-			Player.find()
-				.skip(perPage * page - perPage)
-				.limit(perPage)
-				.exec((err, players) => {
-					Player.countDocuments((err, count) => {
-						if (err) return next(err);
-						res.render('players/player-list-page', {
-							path: '/players',
-							pageTitle: 'Danh sách cầu thủ',
+			Player.find().exec((err, players) => {
+				Player.countDocuments((err, count) => {
+					if (err) return next(err);
+					res.render('players/player-list-page', {
+						path: '/players',
+						pageTitle: 'Danh sách cầu thủ',
 
-							players: players,
-							nations: nations,
-							currentPage: page,
-							pagesNumber: Math.ceil(count / perPage),
-						});
+						players: players,
+						nations: nations,
+						currentPage: page,
+						pagesNumber: Math.ceil(count / perPage),
 					});
 				});
+			});
 		})
 		.catch((err) => {
 			console.log(err);
@@ -32,11 +29,15 @@ exports.getPlayers = (req, res, next) => {
 };
 
 exports.searchPlayers = async (req, res, next) => {
-	const { searchInput, clubFilter, nationFilter } = req.body;
+	const {
+		searchInput,
+		clubFilter,
+		nationFilter,
+		positionFilter,
+		isCaptainFilter,
+	} = req.body;
 
-	let players = await Player.find({
-		name: { $regex: searchInput },
-	});
+	let players = await Player.find();
 
 	if (clubFilter != 'All') {
 		players = players.filter((p) => p.club == clubFilter);
@@ -44,6 +45,14 @@ exports.searchPlayers = async (req, res, next) => {
 
 	if (nationFilter != 'All') {
 		players = players.filter((p) => p.nation == nationFilter);
+	}
+
+	if (positionFilter != 'All') {
+		players = players.filter((p) => p.position == positionFilter);
+	}
+
+	if (isCaptainFilter != 'All') {
+		players = players.filter((p) => p.isCaptain.toString() == isCaptainFilter);
 	}
 
 	res.send(players);

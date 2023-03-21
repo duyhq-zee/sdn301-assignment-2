@@ -9,24 +9,48 @@
 
 		<main>
 			<h3 class="mt-4">Danh sách cầu thủ</h3>
-			<form>
+			<!-- <form>
 				<input type="text" id="search-input" name="search-input">
 				<button type="button" id="search-button">Search</button>
-			</form>
+			</form> -->
 
-			<div class="filters">
-				<select name="club-filter" id="club-filter">
+			<div class="filters" id="filters">
+				<select name="clubFilter" id="club-filter" class="form-control">
 					<option value="All">Tất cả CLB</option>
 					<option value="Manchester United">Manchester United</option>
 					<option value="Manchester City">Manchester City</option>
 					<option value="Liverpool">Liverpool</option>
 				</select>
 
-				<select name="nation-filter" id="nation-filter">
+				<select name="nationFilter" id="nation-filter" class="form-control">
 					<option value="All">Tất cả quốc tịch</option>
 					<% nations.forEach((nation) => { %>
 						<option value="<%= nation.name %>"><%= nation.name %>	</option>
 					<% }) %>
+				</select>
+
+				<select name="positionFilter" id="position-filter" class="form-control">
+					<option value="All">Tất cả vị trí</option>
+					<option value="Thủ môn">Thủ môn</option>
+					<option value="Trung vệ">Trung vệ</option>
+					<option value="Hậu vệ quét">Hậu vệ quét</option>
+					<option value="Hậu vệ cánh">Hậu vệ cánh</option>
+					<option value="Hậu vệ cánh tấn công">Hậu vệ cánh tấn công</option>
+					<option value="Tiền vệ">Tiền vệ</option>
+					<option value="Tiền vệ phòng ngự">Tiền vệ phòng ngự</option>
+					<option value="Tiền vệ trung tâm">Tiền vệ trung tâm</option>
+					<option value="Tiền vệ chạy cánh">Tiền vệ chạy cánh</option>
+					<option value="Tiền vệ tấn công">Tiền vệ tấn công</option>
+					<option value="Tiền đạo cắm">Tiền đạo cắm</option>
+					<option value="Tiền đạo trung tâm">Tiền đạo trung tâm</option>
+					<option value="Hộ công">Hộ công</option>
+					<option value="Tiền đạo cánh">Tiền đạo cánh</option>
+				</select>
+
+				<select name="isCaptainFilter" id="is-captain-filter" class="form-control">
+					<option value="All">Tất cả chức danh</option>
+					<option value="true">Đội trưởng</option>
+					<option value="false">Không phải đội trưởng</option>
 				</select>
 			</div>
 
@@ -35,35 +59,6 @@
 			<% } %>
 			<div class="mt-4" id="player-list-container">
 				<%- include('../partials/players/player-list.ejs', {players: players}) %>
-			</div>
-
-			<div class="paginator">
-
-				<% if (+currentPage >= 2) { %>
-					<a href="/players/page/<%= +currentPage - 1%>" class="d-inline-block">Trang trước</a>
-				<% } %>
-
-				<% if (+currentPage >= 3) { %>
-					<a href="/players/page/<%= +currentPage - 2%>" class="d-inline-block"><%= +currentPage - 2%></a>
-				<% } %>
-
-				<% if (+currentPage >= 2) { %>
-					<a href="/players/page/<%= +currentPage - 1%>" class="d-inline-block"><%= +currentPage - 1%></a>
-				<% } %>
-
-				<p class="d-inline-block"><%= +currentPage %></p>
-
-				<% if (+currentPage <= pagesNumber - 1) { %>
-					<a href="/players/page/<%= +currentPage + 1%>" class="d-inline-block"><%= +currentPage + 1%></a>
-				<% } %>
-
-				<% if (+currentPage <= pagesNumber - 2) { %>
-					<a href="/players/page/<%= +currentPage + 2%>" class="d-inline-block"><%= +currentPage + 2%></a>
-				<% } %>
-
-				<% if (+currentPage <= pagesNumber - 1) { %>
-					<a href="/players/page/<%= +currentPage + 1%>" class="d-inline-block">Trang kế</a>
-				<% } %>
 			</div>
 		</main>
 
@@ -99,23 +94,27 @@
 			const onChange = (e) => {
 				e.preventDefault();
 
-					let searchInput = '';
-					let clubFilter = 'All';
+				let searchInput = '';
+				let clubFilter = 'All';
+				let positionFilter = 'All';
+				let isCaptainFilter = 'All';
 
-					searchInput = $('#search-input').val();
-					clubFilter = $('#club-filter').find(":selected").val();
-					nationFilter = $('#nation-filter').find(":selected").val();
+				searchInput = $('#search-input').val();
+				clubFilter = $('#club-filter').find(":selected").val();
+				nationFilter = $('#nation-filter').find(":selected").val();
+				positionFilter = $('#position-filter').find(":selected").val();
+				isCaptainFilter = $('#is-captain-filter').find(":selected").val();
 
-					$.ajax({
-						url: '/players/search',
-						type: 'POST',
-						data: { searchInput: searchInput, clubFilter: clubFilter, nationFilter: nationFilter },
-						success: searchFunction,
-					});
+				$.ajax({
+					url: '/players/search',
+					type: 'POST',
+					data: { searchInput: searchInput, clubFilter: clubFilter, nationFilter: nationFilter, positionFilter: positionFilter, isCaptainFilter: isCaptainFilter },
+					success: searchFunction,
+				});
 			}
 
 			$(document).ready(function () {
-				searchInput = document
+				// searchInput = document;
 
 				$('#search-input').keyup(function (e) {
 					onChange(e);
@@ -128,7 +127,35 @@
 				$('#nation-filter').change(function (e) {
 					onChange(e);
 				});
+
+				$('#position-filter').change(function (e) {
+					onChange(e);
+				});
+
+				$('#is-captain-filter').change(function (e) {
+					onChange(e);
+				});
 			});
+
+			window.onload = () => {
+				let searchInput = '';
+				let clubFilter = 'All';
+				let positionFilter = 'All';
+				let isCaptainFilter = 'All';
+
+				searchInput = $('#search-input').val();
+				clubFilter = $('#club-filter').find(":selected").val();
+				nationFilter = $('#nation-filter').find(":selected").val();
+				positionFilter = $('#position-filter').find(":selected").val();
+				isCaptainFilter = $('#is-captain-filter').find(":selected").val();
+
+				$.ajax({
+					url: '/players/search',
+					type: 'POST',
+					data: { searchInput: searchInput, clubFilter: clubFilter, nationFilter: nationFilter, positionFilter: positionFilter, isCaptainFilter: isCaptainFilter },
+					success: searchFunction,
+				});
+			}
 		</script>
 			
 	</body>
